@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 import 'rxjs/add/operator/delay';
 
@@ -19,9 +19,10 @@ export class AuthenticationService {
 
     login(email: string, password: string) {
         return of(true).delay(1000)
-            .pipe(map((/*response*/) => {
+            .pipe(map((response: any) => {
                 // set token property
                 // const decodedToken = jwt_decode(response['token']);
+                // this.localStorage.setItem('currentUser', JSON.stringify(decodedToken));
 
                 // store email and jwt token in local storage to keep user logged in between page refreshes
                 this.localStorage.setItem('currentUser', JSON.stringify({
@@ -45,16 +46,18 @@ export class AuthenticationService {
 
     getCurrentUser(): any {
         // TODO: Enable after implementation
-        // return JSON.parse(this.localStorage.getItem('currentUser'));
-        return {
-            token: 'aisdnaksjdn,axmnczm',
-            isAdmin: true,
-            email: 'john.doe@gmail.com',
-            id: '12312323232',
-            alias: 'john.doe@gmail.com'.split('@')[0],
-            expiration: moment().add(1, 'days').toDate(),
-            fullName: 'John Doe'
-        };
+        let user: any = this.localStorage.getItem('currentUser');
+        console.log(this.localStorage.getItem('currentUser'))
+        return JSON.parse(user);
+        // return {
+        //     token: 'aisdnaksjdn,axmnczm',
+        //     isAdmin: true,
+        //     email: 'john.doe@gmail.com',
+        //     id: '12312323232',
+        //     alias: 'john.doe@gmail.com'.split('@')[0],
+        //     expiration: moment().add(1, 'days').toDate(),
+        //     fullName: 'John Doe'
+        // };
     }
 
     passwordResetRequest(email: string) {
