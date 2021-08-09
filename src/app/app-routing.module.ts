@@ -15,6 +15,11 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: '',
+        loadChildren: () => import('./pointeuse-app/pointeuse-app.module').then(m => m.PointeuseAppModule),
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'customers',
         loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule),
         canActivate: [AuthGuard]

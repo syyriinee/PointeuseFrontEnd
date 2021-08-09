@@ -15,7 +15,7 @@
 
     <span class="navbar-spacer"></span>
 
-      <button mat-button [matMenuTriggerFor]="userMenu">
+    <button mat-button [matMenuTriggerFor]="userMenu">
       <mat-icon>person</mat-icon>
       <span fxShow fxHide.xs>
         {{userName}}
@@ -75,11 +75,11 @@
 
         <h3 mat-subheader>Changer Infos</h3>
 
-        <a mat-list-item [routerLink]="['/']">
+        <a mat-list-item [routerLink]="['/employees']">
           <mat-icon mat-list-icon>list</mat-icon>
           <p mat-line>Liste des employés </p>
         </a>
-       
+
         <a mat-list-item [routerLink]="['/']">
           <mat-icon mat-list-icon>work_off</mat-icon>
           <p mat-line>Congés</p>
@@ -107,9 +107,9 @@
         <!-- <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner> -->
       </div>
 
-
-      <router-outlet></router-outlet>
-
+      <div class="page-content">
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 

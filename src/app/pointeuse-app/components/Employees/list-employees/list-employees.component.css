@@ -1,0 +1,29 @@
+ .mat-form-field {
+   font-size: 14px;
+   width: 100%;
+ }
+
+ table {
+   width: 100%;
+   table-layout: fixed;
+ }
+
+ th,
+ td {
+   overflow: hidden;
+   width: 200px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+ }
+
+ .mat-column-actions {
+   width: 10% !important;
+ }
+
+ .actions-styling {
+   padding-left: 10px;
+ }
+
+ .btns-space {
+   margin-right: 5px;
+ }
