@@ -1,6 +1,6 @@
 <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
@@ -27,7 +27,7 @@
         <!-- Superviser Column -->
         <ng-container matColumnDef="superviser">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Superviseur </th>
-            <td mat-cell *matCellDef="let row"> {{row.superviser}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.superviser.nameEmp}} </td>
         </ng-container>
 
 
@@ -40,13 +40,19 @@
 
         <!-- Superviser Column -->
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <th mat-header-cell *matHeaderCellDef>
+                <button mat-raised-button color="primary" matTooltip="Ajouter nouveau employé" (click)="onSave()"
+                    class="btns-space">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </th>
             <td mat-cell *matCellDef="let row" class="actions-styling">
-                <button mat-mini-fab color="primary" aria-label="Modifier" class="btns-space">
+                <button mat-mini-fab style="background-color: #46a35e;" matTooltip="Modifier cet employé"
+                    (click)="onSave(row)" class="btns-space">
                     <mat-icon>edit</mat-icon>
                 </button>
 
-                <button mat-mini-fab color="warn" aria-label="Désactiver">
+                <button mat-mini-fab color="warn" matTooltip="Désactiver cet employé" (click)="onDelete(row)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

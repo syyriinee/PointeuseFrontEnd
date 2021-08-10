@@ -47,17 +47,7 @@ export class AuthenticationService {
     getCurrentUser(): any {
         // TODO: Enable after implementation
         let user: any = this.localStorage.getItem('currentUser');
-        console.log(this.localStorage.getItem('currentUser'))
         return JSON.parse(user);
-        // return {
-        //     token: 'aisdnaksjdn,axmnczm',
-        //     isAdmin: true,
-        //     email: 'john.doe@gmail.com',
-        //     id: '12312323232',
-        //     alias: 'john.doe@gmail.com'.split('@')[0],
-        //     expiration: moment().add(1, 'days').toDate(),
-        //     fullName: 'John Doe'
-        // };
     }
 
     passwordResetRequest(email: string) {
