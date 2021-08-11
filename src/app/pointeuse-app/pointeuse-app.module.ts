@@ -7,11 +7,20 @@ import { CustomMaterialModule } from '../custom-material/custom-material.module'
 import { SaveEmployeeComponent } from './components/Employees/save-employee/save-employee.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ListeCongesComponent } from './components/Conges/liste-conges/liste-conges.component';
+import { SaveCongesComponent } from './components/Conges/save-conges/save-conges.component';
+import { ListeMissionsComponent } from './components/Missions/liste-missions/liste-missions.component';
+import { SaveMissionsComponent } from './components/Missions/save-missions/save-missions.component';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
     ListEmployeesComponent,
-    SaveEmployeeComponent
+    SaveEmployeeComponent,
+    ListeCongesComponent,
+    SaveCongesComponent,
+    ListeMissionsComponent,
+    SaveMissionsComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +29,8 @@ import { SharedModule } from '../shared/shared.module';
     CustomMaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgxMatDatetimePickerModule
   ]
 })
 export class PointeuseAppModule { }

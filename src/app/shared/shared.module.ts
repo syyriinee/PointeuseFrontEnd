@@ -10,6 +10,8 @@ import { LocalDatePipe } from './pipes/local-date.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
 import { LayoutComponent } from './layout/layout.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-  ],
+    NgxMatDatetimePickerModule,
+     NgxMatTimepickerModule
+    ],
   declarations: [
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
@@ -36,7 +40,9 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ConfirmDialogComponent,
     ContentPlaceholderAnimationComponent,
     LocalDatePipe,
-    YesNoPipe
+    YesNoPipe,
+    NgxMatDatetimePickerModule,
+     NgxMatTimepickerModule
   ],
   entryComponents: [
     ConfirmDialogComponent

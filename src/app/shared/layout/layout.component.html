@@ -54,6 +54,13 @@
 
         <a mat-list-item [routerLink]="['/']" routerLinkActive="active">
           <mat-icon mat-list-icon>
+            event_available
+          </mat-icon>
+          <p mat-line> Mon planing </p>
+        </a>
+
+        <a mat-list-item [routerLink]="['/']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
             fingerprint
           </mat-icon>
           <p mat-line> Pointage </p>
@@ -73,12 +80,12 @@
           <p mat-line>Liste des employés </p>
         </a>
 
-        <a mat-list-item [routerLink]="['/']">
+        <a mat-list-item [routerLink]="['/conges']">
           <mat-icon mat-list-icon>work_off</mat-icon>
           <p mat-line>Congés</p>
         </a>
 
-        <a mat-list-item [routerLink]="['/']">
+        <a mat-list-item [routerLink]="['/missions']">
           <mat-icon mat-list-icon>work</mat-icon>
           <p mat-line>Missions</p>
         </a>

@@ -1,0 +1,62 @@
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="idCon">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.idCon}} </td>
+        </ng-container>
+
+        <!-- employe Column -->
+        <ng-container matColumnDef="employe">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Employé </th>
+            <td mat-cell *matCellDef="let row"> {{row.employe.nameEmp}} </td>
+        </ng-container>
+
+
+        <!-- dateDebut Column -->
+        <ng-container matColumnDef="dateDebut">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date début </th>
+            <td mat-cell *matCellDef="let row"> {{row.dateDebut | date:'dd/MM/yyyy hh:mm'}} </td>
+        </ng-container>
+
+        
+
+        <!-- dateFin Column -->
+        <ng-container matColumnDef="dateFin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date fin </th>
+            <td mat-cell *matCellDef="let row"> {{row.dateFin | date:'dd/MM/yyyy hh:mm'}} </td>
+        </ng-container>
+
+
+        <!-- actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+                <button mat-raised-button color="primary" matTooltip="Ajouter nouveau congé" (click)="onSave()"
+                    class="btns-space">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </th>
+            <td mat-cell *matCellDef="let row" class="actions-styling">
+                <button mat-mini-fab color="warn" matTooltip="Désactiver ce congé" (click)="onDelete(row)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

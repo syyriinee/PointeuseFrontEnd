@@ -1,0 +1,66 @@
+<div class="bloc-title">
+    <div class="title">
+        <h1 mat-dialog-title>Ajouter Mission</h1>
+    </div>
+
+    <span class="close-icon" (click)="onNoClick()">
+        <mat-icon>close</mat-icon>
+    </span>
+</div>
+
+<div mat-dialog-content>
+    <div class="container">
+        <form [formGroup]="missionForm" (ngSubmit)="onSubmit()" class="form">
+
+            <mat-form-field class="form-element">
+                <mat-label>Employe</mat-label>
+                <mat-select disableRipple formControlName="employeId">
+                    <mat-option value=1>Syrine</mat-option>
+                    <mat-option value=2>Safa</mat-option>
+                    <mat-option value=3>Slah</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="!missionForm.controls['employeId'].valid && missionForm.controls['employeId'].touched">
+                    {{ getErrorEmployeId() }}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <mat-label>Date Début</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateDebut">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error
+                *ngIf="!missionForm.controls['dateDebut'].valid && missionForm.controls['dateDebut'].touched">
+                {{ getErrorDateDebut() }}
+            </mat-error>
+            </mat-form-field>
+
+            <!-- lien =https://www.npmjs.com/package/@angular-material-components/datetime-picker -->
+            <!-- <mat-form-field class="form-element">
+                <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Choose a date"
+                    formControlName="dateDebut">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker1></ngx-mat-datetime-picker>
+            </mat-form-field> -->
+
+            <mat-form-field class="form-element">
+                <mat-label>Date Fin</mat-label>
+                <input matInput [matDatepicker]="pickerFin" formControlName="dateFin">
+                <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFin></mat-datepicker>
+                <mat-error *ngIf="!missionForm.controls['dateFin'].valid && missionForm.controls['dateFin'].touched">
+                    {{ getErrorDateFin() }}
+                </mat-error>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="container">
+        {{ missionForm.value | json }}
+    </div>
+</div>
+<div mat-dialog-actions class="display_btn">
+    <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!missionForm.valid">Enregistrer</button>
+</div>

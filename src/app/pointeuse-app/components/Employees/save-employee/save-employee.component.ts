@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Employee } from 'src/app/pointeuse-app/models/employee.model';
 import { EmployeeVM } from 'src/app/pointeuse-app/models/employeeVM.model';
-
 @Component({
   selector: 'app-save-employee',
   templateUrl: './save-employee.component.html',
