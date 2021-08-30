@@ -28,6 +28,7 @@ export class SaveEmployeeComponent implements OnInit {
     this.employeeForm = this.formBuilder.group({
       'nameEmp': ["", [Validators.required, Validators.minLength(5)]],
       'fonction': ["", [Validators.required]],
+      'planning': ["", [Validators.required]],
       'superviser': ["", [Validators.required]],
       'birth': [, [Validators.required]]
     })

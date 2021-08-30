@@ -12,4 +12,5 @@ export class Employee {
     public fonction!: string;
     public birth!: Date;
     public superviseurId!: number;
+    public planning!: number;
 }

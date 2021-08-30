@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Employee } from '../models/employee.model';
 import { EmployeeVM } from '../models/employeeVM.model';
@@ -8,6 +9,7 @@ import { EmployeeVM } from '../models/employeeVM.model';
   providedIn: 'root'
 })
 export class EmployeeService {
+  private host: any;
 
   employees: EmployeeVM[] = [
     new EmployeeVM(1, "syrine", "PDG", new Employee(1, "syrine", "PDG", new Date()), new Date()),
@@ -24,10 +26,23 @@ export class EmployeeService {
     new EmployeeVM(12, "Ilyes", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
   ];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.host = environment.backEndUrl;
+   }
 
-  listEmployees() {
-    //return this.http.get(environment.backEndUrl + "/employees");
-    return this.employees;
+  listEmployees( pageSize:number, pageNumber:number): Observable<Employee[]>{
+    let params = new HttpParams();
+    console.log("***********listEmployees*************");
+    if (pageNumber !== null) {
+      params = params.set('page', pageNumber.toString());
+    }
+    if (pageSize) {
+      params = params.set('size', pageSize.toString());
+    }
+    console.log(environment.backEndUrl + "/employe/employeList");
+
+    return this.http.get<Employee[]>(environment.backEndUrl + "/employe/employeList", { params });
+    //return this.http.get<Employee[]>(environment.backEndUrl + "/employe/employeList2");
+    //return this.employees;
   }
 }

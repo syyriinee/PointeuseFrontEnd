@@ -43,7 +43,7 @@
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="sidenav">
 
       <mat-nav-list>
-        <h3 mat-subheader>General Infos</h3>
+        <h3 mat-subheader>Infos Generales</h3>
 
         <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
           <mat-icon mat-list-icon>
@@ -54,16 +54,16 @@
 
         <a mat-list-item [routerLink]="['/']" routerLinkActive="active">
           <mat-icon mat-list-icon>
-            event_available
+            fingerprint
           </mat-icon>
-          <p mat-line> Mon planing </p>
+          <p mat-line> Pointage </p>
         </a>
 
         <a mat-list-item [routerLink]="['/']" routerLinkActive="active">
           <mat-icon mat-list-icon>
-            fingerprint
+            event_available
           </mat-icon>
-          <p mat-line> Pointage </p>
+          <p mat-line> Mon planing </p>
         </a>
 
         <a mat-list-item [routerLink]="['/account/profile']">

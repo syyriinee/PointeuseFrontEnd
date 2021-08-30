@@ -56,6 +56,18 @@
                 </mat-error>
             </mat-form-field>
 
+            <!-- <mat-form-field class="form-element">
+                <mat-label>Planning</mat-label>
+                <mat-select disableRipple formControlName="planning" [(ngModel)]="user.planning">
+                    <mat-option value="1">Groupe A</mat-option>
+                    <mat-option value="2">Groupe B</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="!employeeForm.controls['fonction'].valid && employeeForm.controls['fonction'].touched">
+                    {{ getErrorFonction() }}
+                </mat-error>
+            </mat-form-field> -->
+
         </form>
     </div>
 
