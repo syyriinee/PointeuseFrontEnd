@@ -75,6 +75,11 @@
 
         <h3 mat-subheader>Changer Infos</h3>
 
+        <a mat-list-item [routerLink]="['/pointage']">
+          <mat-icon mat-list-icon>get_app</mat-icon>
+          <p mat-line>importer les pointages </p>
+        </a>
+
         <a mat-list-item [routerLink]="['/employees']">
           <mat-icon mat-list-icon>list</mat-icon>
           <p mat-line>Liste des employés </p>
@@ -94,6 +99,12 @@
           <mat-icon mat-list-icon>calendar_today</mat-icon>
           <p mat-line>Planning</p>
         </a>
+
+        <a mat-list-item [routerLink]="['/jourFeries']">
+          <mat-icon mat-list-icon>home</mat-icon>
+          <p mat-line>Jours fériés</p>
+        </a>
+
       </mat-nav-list>
 
     </mat-sidenav>

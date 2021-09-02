@@ -12,6 +12,9 @@ import { SaveCongesComponent } from './components/Conges/save-conges/save-conges
 import { ListeMissionsComponent } from './components/Missions/liste-missions/liste-missions.component';
 import { SaveMissionsComponent } from './components/Missions/save-missions/save-missions.component';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+import { PointageComponent } from './components/pointage/pointage.component';
+import { ListeJourFerieComponent } from './components/jourFerie/liste-jourFerie/liste-jourFerie.component';
+import { SavejourFerieComponent } from './components/jourFerie/save-jourFerie/save-jourFerie.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,11 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateMod
     ListeCongesComponent,
     SaveCongesComponent,
     ListeMissionsComponent,
-    SaveMissionsComponent
+    SaveMissionsComponent,
+    ListeJourFerieComponent,
+    SavejourFerieComponent,
+    PointageComponent
+
   ],
   imports: [
     CommonModule,

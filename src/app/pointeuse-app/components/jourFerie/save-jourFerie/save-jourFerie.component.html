@@ -1,0 +1,44 @@
+<div class="bloc-title">
+    <div class="title">
+        <h1 mat-dialog-title>Ajouter un Jour férié</h1>
+    </div>
+
+    <span class="close-icon" (click)="onNoClick()">
+        <mat-icon>close</mat-icon>
+    </span>
+</div>
+
+<div mat-dialog-content>
+    <div class="container">
+        <form [formGroup]="jourFerieForm" (ngSubmit)="onSubmit()" class="form">
+
+            <mat-form-field class="form-element">
+                <mat-label>Jour Férié</mat-label>
+                <input matInput placeholder="Nom jour férié" formControlName="name">
+                <mat-error *ngIf="!jourFerieForm.controls['name'].valid && jourFerieForm.controls['name'].touched">
+                    {{ getErrorName() }}
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-element">
+                <mat-label>Date </mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="!jourFerieForm.controls['date'].valid && jourFerieForm.controls['date'].touched">
+                    {{ getErrorDate() }}
+                </mat-error>
+            </mat-form-field>
+
+
+        </form>
+    </div>
+
+    <div class="container">
+        {{ jourFerieForm.value | json }}
+    </div>
+</div>
+<div mat-dialog-actions class="display_btn">
+    <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!jourFerieForm.valid">Enregistrer</button>
+</div>
