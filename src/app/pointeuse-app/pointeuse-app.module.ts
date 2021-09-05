@@ -15,6 +15,9 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateMod
 import { PointageComponent } from './components/pointage/pointage.component';
 import { ListeJourFerieComponent } from './components/jourFerie/liste-jourFerie/liste-jourFerie.component';
 import { SavejourFerieComponent } from './components/jourFerie/save-jourFerie/save-jourFerie.component';
+import { PlanningComponent } from './components/planning/planning.component';
+import { SavePlanningComponent } from './components/planning/save-planning/save-planning.component';
+import { HoraireItemComponent } from './components/planning/horaire-item/horaire-item.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { SavejourFerieComponent } from './components/jourFerie/save-jourFerie/sa
     SaveMissionsComponent,
     ListeJourFerieComponent,
     SavejourFerieComponent,
-    PointageComponent
+    PointageComponent,
+    PlanningComponent,
+    SavePlanningComponent,
+    HoraireItemComponent
 
   ],
   imports: [

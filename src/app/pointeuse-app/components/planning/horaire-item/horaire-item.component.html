@@ -1,0 +1,31 @@
+<div fxLayout="row">
+  <div fxLayout="column" fxFlex="50%">
+    <mat-form-field class="full-width">
+      <mat-label>Date Début</mat-label>
+      <input matInput [matDatepicker]="pickerDeb" name="dateDeb" dateDeb="ngModel" [(ngModel)]="item.dateDeb" />
+      <mat-datepicker-toggle matSuffix [for]="pickerDeb">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #pickerDeb></mat-datepicker>
+      <!--<mat-error *ngIf="couponType.hasError('required')">
+        Type Coupon est <strong>obligatoire</strong>
+      </mat-error>-->
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column" fxFlex="50%">
+    <mat-form-field class="full-width">
+      <mat-label>Date Fin</mat-label>
+      <input matInput [matDatepicker]="pickerFin" name="dateFin" dateFin="ngModel" [(ngModel)]="item.dateFin" />
+      <mat-datepicker-toggle matSuffix [for]="pickerFin">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+      <!--<mat-error *ngIf="regExpText.hasError('required')">
+        Expression réguliaire est <strong>obligatoire</strong>
+      </mat-error>-->
+    </mat-form-field>
+  </div>
+
+</div>
+

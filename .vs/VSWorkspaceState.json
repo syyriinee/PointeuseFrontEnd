@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\core",
+    "\\src\\app\\core\\interceptors",
+    "\\src\\app\\core\\services",
+    "\\src\\environments"
+  ],
+  "PreviewInSolutionExplorer": false
+}
