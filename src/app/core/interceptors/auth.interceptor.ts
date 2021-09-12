@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        const user = this.authService.getCurrentUser();
+        const user = this.authService.currentUser();
 
         if (user && user.token) {
 

@@ -2,23 +2,23 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './core/guards/auth.guard';
+import { AuthGuardRole } from './core/guards/authGuardRole.guard';
 
 const appRoutes: Routes = [
     {
         path: 'auth',
         loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-
     },
-    
+
     {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AuthGuardRole]
     },
     {
         path: '',
         loadChildren: () => import('./pointeuse-app/pointeuse-app.module').then(m => m.PointeuseAppModule),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AuthGuardRole]
     },
     {
         path: 'account',

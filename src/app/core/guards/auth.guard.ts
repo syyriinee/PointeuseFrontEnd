@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import * as moment from 'moment';
-
 import { AuthenticationService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';
 
@@ -13,17 +11,11 @@ export class AuthGuard implements CanActivate {
         private authService: AuthenticationService) { }
 
     canActivate() {
-        const user = this.authService.getCurrentUser();
+        const user = this.authService.currentUser;
+        console.log("iciiiiiiiiiiii",user)
 
-        if (user && user.expiration) {
-
-            if (moment() < moment(user.expiration)) {
-                return true;
-            } else {
-                this.notificationService.openSnackBar('Your session has expired');
-                this.router.navigate(['auth/login']);
-                return false;
-            }
+        if (user) {
+            return true;
         }
 
         this.router.navigate(['auth/login']);

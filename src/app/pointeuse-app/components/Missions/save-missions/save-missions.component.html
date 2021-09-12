@@ -10,47 +10,47 @@
 
 <div mat-dialog-content>
     <div class="container">
-        <form [formGroup]="missionForm" (ngSubmit)="onSubmit()" class="form">
+        <form [formGroup]="missionForm" class="form">
 
             <mat-form-field class="form-element">
-                <mat-label>Employe</mat-label>
-                <mat-select disableRipple formControlName="employeId">
+                <mat-label>Employee</mat-label>
+                <mat-select disableRipple formControlName="employeeId">
                     <mat-option value=1>Syrine</mat-option>
                     <mat-option value=2>Safa</mat-option>
                     <mat-option value=3>Slah</mat-option>
                 </mat-select>
                 <mat-error
-                    *ngIf="!missionForm.controls['employeId'].valid && missionForm.controls['employeId'].touched">
-                    {{ getErrorEmployeId() }}
+                    *ngIf="!missionForm.controls['employeeId'].valid && missionForm.controls['employeeId'].touched">
+                    {{ getErrorEmployeeId() }}
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field class="form-element">
                 <mat-label>Date Début</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="dateDebut">
+                <input matInput [matDatepicker]="picker" formControlName="debutMission">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error
-                *ngIf="!missionForm.controls['dateDebut'].valid && missionForm.controls['dateDebut'].touched">
-                {{ getErrorDateDebut() }}
+                *ngIf="!missionForm.controls['debutMission'].valid && missionForm.controls['debutMission'].touched">
+                {{ getErrorDebutMission() }}
             </mat-error>
             </mat-form-field>
 
             <!-- lien =https://www.npmjs.com/package/@angular-material-components/datetime-picker -->
             <!-- <mat-form-field class="form-element">
                 <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Choose a date"
-                    formControlName="dateDebut">
+                    formControlName="debutMission">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <ngx-mat-datetime-picker #picker1></ngx-mat-datetime-picker>
             </mat-form-field> -->
 
             <mat-form-field class="form-element">
                 <mat-label>Date Fin</mat-label>
-                <input matInput [matDatepicker]="pickerFin" formControlName="dateFin">
+                <input matInput [matDatepicker]="pickerFin" formControlName="finMission">
                 <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
                 <mat-datepicker #pickerFin></mat-datepicker>
-                <mat-error *ngIf="!missionForm.controls['dateFin'].valid && missionForm.controls['dateFin'].touched">
-                    {{ getErrorDateFin() }}
+                <mat-error *ngIf="!missionForm.controls['finMission'].valid && missionForm.controls['finMission'].touched">
+                    {{ getErrorFinMission() }}
                 </mat-error>
             </mat-form-field>
         </form>
@@ -62,5 +62,6 @@
 </div>
 <div mat-dialog-actions class="display_btn">
     <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
-    <button mat-raised-button type="submit" color="primary" [disabled]="!missionForm.valid">Enregistrer</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!missionForm.valid"
+    [mat-dialog-close]="missionForm.value">Enregistrer</button>
 </div>

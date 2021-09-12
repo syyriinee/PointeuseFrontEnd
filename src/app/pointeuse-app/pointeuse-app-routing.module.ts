@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../shared/layout/layout.component';
-import { ListeCongesComponent } from './components/Conges/liste-conges/liste-conges.component';
+import { ListeDayOffsComponent } from './components/DayOffs/liste-dayOffs/liste-dayOffs.component';
 import { ListEmployeesComponent } from './components/Employees/list-employees/list-employees.component';
-import { ListeJourFerieComponent } from './components/jourFerie/liste-jourFerie/liste-jourFerie.component';
+import { ListeHolidayComponent } from './components/holiday/liste-holiday/liste-holiday.component';
 import { ListeMissionsComponent } from './components/Missions/liste-missions/liste-missions.component';
 import { PlanningComponent } from './components/planning/planning.component';
 import { SavePlanningComponent } from './components/planning/save-planning/save-planning.component';
-import { PointageComponent } from './components/pointage/pointage.component';
+import { PointageComponent } from './components/uploadPointage/pointage.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'pointage', component: PointageComponent },
-      { path: 'employees', component: ListEmployeesComponent },
-      { path: 'conges', component: ListeCongesComponent },
-      { path: 'missions', component: ListeMissionsComponent },
-      { path: 'jourFeries', component: ListeJourFerieComponent },
-      { path: 'planning', component: PlanningComponent },
-      { path: 'planning/new', component: SavePlanningComponent },
+      { path: 'admin/pointage', component: PointageComponent },
+      { path: 'admin/employees', component: ListEmployeesComponent },
+      { path: 'admin/dayOffs', component: ListeDayOffsComponent },
+      { path: 'admin/missions', component: ListeMissionsComponent },
+      { path: 'admin/holidays', component: ListeHolidayComponent },
+      { path: 'admin/planning', component: PlanningComponent },
+      { path: 'admin/planning/new', component: SavePlanningComponent },
     ]
   }
 ];

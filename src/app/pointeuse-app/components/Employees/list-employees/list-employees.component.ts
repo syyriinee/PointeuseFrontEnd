@@ -1,12 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { merge, Observable, of, Subscription } from 'rxjs';
+import { merge, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { Employee } from 'src/app/pointeuse-app/models/employee.model';
-import { EmployeeVM } from 'src/app/pointeuse-app/models/employeeVM.model';
 import { EmployeeService } from 'src/app/pointeuse-app/services/employee.service';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { SaveEmployeeComponent } from '../save-employee/save-employee.component';
@@ -18,18 +17,18 @@ import { SaveEmployeeComponent } from '../save-employee/save-employee.component'
 })
 export class ListEmployeesComponent implements OnInit {
 
-  displayedColumns: string[] = ['idEmp', 'nameEmp', 'fonction', 'superviser', 'birth', 'actions'];
+  displayedColumns: string[] = ['idEmp', 'nameEmp', 'fonction', 'birth', 'actions'];
   dataSource!: MatTableDataSource<Employee>;
 
   employees!: Employee[];
   employee!: Employee;
 
-  pageSize: number = 2;
+  pageSize: number = 10;
   pageNumber: number = 0;
   resultsLength!: number;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   constructor(private _employeeService: EmployeeService, public dialog: MatDialog,
     private cdRef: ChangeDetectorRef) {
@@ -40,63 +39,32 @@ export class ListEmployeesComponent implements OnInit {
   }
 
   loadEmployees() {
-    console.log(this.paginator);
     if (this.paginator?.pageSize)
       this.pageSize = this.paginator.pageSize;
 
     if (this.paginator?.pageIndex)
       this.pageNumber = this.paginator.pageIndex;
 
-    console.log("-------pageSize------------------");
-    console.log(this.pageSize);
-    console.log("-------pageNumber----*****--------------");
-    console.log(this.pageNumber);
-
-    // merge(this.paginator?.page)
-    //   .pipe(
-    //     startWith({}),
-    //     switchMap(() => {
-    //       //this.cdRef.detectChanges(); // si on le meyt pas --> Exception expression has changed after it was checked.
-    //       return this._employeeService.listEmployees(this.pageSize, this.pageNumber);
-    //     }),
-    //     map((data: any) => {
-    //       //this.cdRef.detectChanges();
-    //       this.resultsLength = data?.totalElements;
-    //       return data;
-    //     }),
-    //     catchError(() => {
-    //       //this.cdRef.detectChanges();
-    //       return of([]);
-    //     })
-    //   ).subscribe((response: any) => {
-    //     this.employees = response.content;
-
-    //     console.log("-------loadEmployees------------------");
-
-    //     console.log(this.employees);
-    //     console.log("-------loadEmployees----*****--------------");
-
-    //     this.dataSource = new MatTableDataSource(this.employees);
-    //     console.log(this.paginator);
-    //     this.dataSource.paginator = this.paginator;
-    //     this.dataSource.sort = this.sort;
-    //   });
-
-    this._employeeService.listEmployees(this.pageSize, this.pageNumber).subscribe(
-      (response: any) => {
+    merge(this.paginator?.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.cdRef.detectChanges(); // si on le meyt pas --> Exception expression has changed after it was checked.
+          return this._employeeService.listEmployees(this.pageSize, this.pageNumber);
+        }),
+        map((data: any) => {
+          this.cdRef.detectChanges();
+          this.resultsLength = data?.totalElements;
+          console.log(this.resultsLength);
+          return data;
+        }),
+        catchError(() => {
+          this.cdRef.detectChanges();
+          return of([]);
+        })
+      ).subscribe((response: any) => {
         console.log(response);
         this.employees = response.content;
-
-        console.log("ccccc",this.pageSize);
-        console.log("ffffff",this.pageNumber);
-
-        // this.paginator.pageIndex=this.pageNumber
-        // this.paginator.pageSize=this.pageSize
-        // console.log("eeeeeeeee",this.paginator);
-
-        this.resultsLength = response.totalElements;
-        this.paginator.length=this.resultsLength;
-        console.log("this.resultsLength =", this.resultsLength);
 
         console.log("-------loadEmployees------------------");
 
@@ -105,15 +73,15 @@ export class ListEmployeesComponent implements OnInit {
 
         this.dataSource = new MatTableDataSource(this.employees);
         console.log(this.paginator);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      err => {
-        console.log(err)
+         this.dataSource.paginator = this.paginator;
+         this.dataSource.sort = this.sort;
       });
   }
 
   paginatorChange(event: any) {
+    this.pageSize = event.pageSize;
+    this.pageNumber = event.pageIndex;
+
     this.loadEmployees();
   }
 
@@ -126,10 +94,10 @@ export class ListEmployeesComponent implements OnInit {
     }
   }
 
-  onSave(item?: EmployeeVM) {
+  onSave(item?: Employee) {
     console.log("item=", item)
     if (!item)
-      item = new EmployeeVM(0, "", "", undefined, new Date());
+      item = new Employee(0, "", "", new Date());
 
     const dialogRef = this.dialog.open(SaveEmployeeComponent, {
       width: '800px',
@@ -142,7 +110,7 @@ export class ListEmployeesComponent implements OnInit {
     });
   }
 
-  onDelete(item: EmployeeVM) {
+  onDelete(item: Employee) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '800px',
       data: {

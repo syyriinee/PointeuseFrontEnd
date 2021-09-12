@@ -4,9 +4,8 @@ import { map } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 import * as moment from 'moment';
 import 'rxjs/add/operator/delay';
-
-import { environment } from '../../../environments/environment';
 import { of, EMPTY } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -18,17 +17,27 @@ export class AuthenticationService {
     }
 
     login(email: string, password: string) {
+
+        let item={
+            "email":email,
+            "password":password
+        };
+       
+        // return this.http.post(environment.backEndUrl + "/employees/authenticate", item)
+        // .pipe(map((response: any) => {
+        //     console.log(response)
+        //      this.localStorage.setItem('currentUser', JSON.stringify(response));
+        //     return true;
+        // }));
+
         return of(true).delay(1000)
             .pipe(map((response: any) => {
-                // set token property
-                // const decodedToken = jwt_decode(response['token']);
-                // this.localStorage.setItem('currentUser', JSON.stringify(decodedToken));
-
                 // store email and jwt token in local storage to keep user logged in between page refreshes
                 this.localStorage.setItem('currentUser', JSON.stringify({
                     token: 'aisdnaksjdn,axmnczm',
                     isAdmin: true,
                     email: 'john.doe@gmail.com',
+                    fonction: 'GRH',
                     id: '12312323232',
                     alias: 'john.doe@gmail.com'.split('@')[0],
                     expiration: moment().add(1, 'days').toDate(),
@@ -44,7 +53,7 @@ export class AuthenticationService {
         this.localStorage.removeItem('currentUser');
     }
 
-    getCurrentUser(): any {
+    get currentUser(): any {
         // TODO: Enable after implementation
         let user: any = this.localStorage.getItem('currentUser');
         return JSON.parse(user);

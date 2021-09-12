@@ -10,51 +10,51 @@
 
 <div mat-dialog-content>
     <div class="container">
-        <form [formGroup]="congeForm" (ngSubmit)="onSubmit()" class="form">
+        <form [formGroup]="dayOffForm" class="form">
 
             <mat-form-field class="form-element">
-                <mat-label>Employe</mat-label>
-                <mat-select disableRipple formControlName="employeId">
+                <mat-label>Employee</mat-label>
+                <mat-select disableRipple formControlName="employeeId">
                     <mat-option value=1>Syrine</mat-option>
                     <mat-option value=2>Safa</mat-option>
                     <mat-option value=3>Slah</mat-option>
                 </mat-select>
                 <mat-error
-                    *ngIf="!congeForm.controls['employeId'].valid && congeForm.controls['employeId'].touched">
-                    {{ getErrorEmployeId() }}
+                    *ngIf="!dayOffForm.controls['employeeId'].valid && dayOffForm.controls['employeeId'].touched">
+                    {{ getErrorEmployeeId() }}
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field class="form-element">
                 <mat-label>Date Début</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="dateDebut">
+                <input matInput [matDatepicker]="picker" formControlName="debutDayOff">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error
-                *ngIf="!congeForm.controls['dateDebut'].valid && congeForm.controls['dateDebut'].touched">
-                {{ getErrorDateDebut() }}
+                *ngIf="!dayOffForm.controls['debutDayOff'].valid && dayOffForm.controls['debutDayOff'].touched">
+                {{ getErrorDebutDayOff() }}
             </mat-error>
             </mat-form-field>
 
             <mat-form-field class="form-element">
                 <mat-label>Date Fin</mat-label>
-                <input matInput [matDatepicker]="pickerFin" formControlName="dateFin">
+                <input matInput [matDatepicker]="pickerFin" formControlName="finDayOff">
                 <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
                 <mat-datepicker #pickerFin></mat-datepicker>
                 <mat-error
-                *ngIf="!congeForm.controls['dateFin'].valid && congeForm.controls['dateFin'].touched">
-                {{ getErrorDateFin() }}
+                *ngIf="!dayOffForm.controls['finDayOff'].valid && dayOffForm.controls['finDayOff'].touched">
+                {{ getErrorFinDayOff() }}
             </mat-error>
             </mat-form-field>
         </form>
     </div>
 
     <div class="container">
-        {{ congeForm.value | json }}
+        {{ dayOffForm.value | json }}
     </div>
 </div>
 <div mat-dialog-actions class="display_btn">
     <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
     <button mat-raised-button type="submit" color="primary"
-        [disabled]="!congeForm.valid">Enregistrer</button>
+        [disabled]="!dayOffForm.valid" [mat-dialog-close]="dayOffForm.value">Enregistrer</button>
 </div>

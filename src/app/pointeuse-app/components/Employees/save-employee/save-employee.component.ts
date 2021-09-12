@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EmployeeVM } from 'src/app/pointeuse-app/models/employeeVM.model';
+import { Employee } from 'src/app/pointeuse-app/models/employee.model';
 @Component({
   selector: 'app-save-employee',
   templateUrl: './save-employee.component.html',
@@ -13,7 +13,7 @@ export class SaveEmployeeComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SaveEmployeeComponent>,
-    @Inject(MAT_DIALOG_DATA) public user: EmployeeVM,
+    @Inject(MAT_DIALOG_DATA) public user: Employee,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class SaveEmployeeComponent implements OnInit {
       'nameEmp': ["", [Validators.required, Validators.minLength(5)]],
       'fonction': ["", [Validators.required]],
       'planning': ["", [Validators.required]],
-      'superviser': ["", [Validators.required]],
+      //'supervisor': ["", [Validators.required]],
       'birth': [, [Validators.required]]
     })
   }
@@ -44,7 +44,7 @@ export class SaveEmployeeComponent implements OnInit {
   }
 
   getErrorSupervisor() {
-    return this.employeeForm.controls.superviser.hasError('required') ? 'Champs est vide' : '';
+    return this.employeeForm.controls.supervisor.hasError('required') ? 'Champs est vide' : '';
   }
 
   getErrorBirth() {

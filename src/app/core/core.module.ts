@@ -9,8 +9,7 @@ import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { throwIfAlreadyLoaded } from './guards/module-import.guard';
 import { GlobalErrorHandler } from './services/globar-error.handler';
-import { AdminGuard } from './guards/admin.guard';
-
+import { AuthGuardRole } from './guards/authGuardRole.guard';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +19,7 @@ import { AdminGuard } from './guards/admin.guard';
   ],
   providers: [
     AuthGuard,
-    AdminGuard,
+    AuthGuardRole,
     MediaMatcher,
     {
       provide: HTTP_INTERCEPTORS,

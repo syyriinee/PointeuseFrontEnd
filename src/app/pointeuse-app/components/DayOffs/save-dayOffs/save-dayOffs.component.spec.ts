@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaveCongesComponent } from './save-conges.component';
+import { SaveDayOffsComponent } from './save-dayOffs.component';
 
-describe('SaveCongesComponent', () => {
-  let component: SaveCongesComponent;
-  let fixture: ComponentFixture<SaveCongesComponent>;
+describe('SaveDayOffsComponent', () => {
+  let component: SaveDayOffsComponent;
+  let fixture: ComponentFixture<SaveDayOffsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SaveCongesComponent ]
+      declarations: [ SaveDayOffsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SaveCongesComponent);
+    fixture = TestBed.createComponent(SaveDayOffsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

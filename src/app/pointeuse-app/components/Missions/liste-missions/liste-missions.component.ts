@@ -15,13 +15,13 @@ import { SaveMissionsComponent } from '../save-missions/save-missions.component'
 })
 export class ListeMissionsComponent implements OnInit {
 
-  displayedColumns: string[] = ['idCon', 'dateDebut', 'dateFin', 'employe', 'actions'];
+  displayedColumns: string[] = ['idDayOff', 'debutMission', 'finMission', 'employee', 'actions'];
   dataSource!: MatTableDataSource<Mission>;
 
   missions!: Mission[];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   constructor(private _missionService: MissionService, public dialog: MatDialog) {
   }
@@ -30,15 +30,19 @@ export class ListeMissionsComponent implements OnInit {
     this.loadMissions();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   loadMissions() {
-    this.missions = this._missionService.listMissions();
-    console.log(this.missions)
-    this.dataSource = new MatTableDataSource(this.missions);
+    this._missionService.listMissions().subscribe(
+      (dataSuccess: any) => {
+        console.log("load missions=", dataSuccess)
+        this.missions = dataSuccess;
+        this.dataSource = new MatTableDataSource(this.missions);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error => {
+        console.log("load list missions error=", error)
+      }
+    );
   }
 
   applyFilter(event: Event) {
@@ -57,6 +61,18 @@ export class ListeMissionsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if (result) {
+        console.log('result=', result);
+        this._missionService.saveMission(result).subscribe(
+          success => { 
+            console.log(success);
+            this.loadMissions();
+           },
+          error => { 
+            console.log(error) 
+          },
+        );
+      }
     });
   }
 
@@ -72,9 +88,15 @@ export class ListeMissionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
         //supprimer
-        let index = this.dataSource.data.findIndex(x => x.idMission == item.idMission)
-        this.dataSource.data.splice(index, 1)
-        this.loadMissions();
+        this._missionService.deleteMission(item.idMission).subscribe(
+          success=>{
+            console.log(success)
+            this.loadMissions();
+          },
+          error=>{
+            console.log(error)
+          }
+        );      
       }
     });
   }

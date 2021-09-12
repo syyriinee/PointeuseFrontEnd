@@ -2,11 +2,11 @@ import { Employee } from "./employee.model";
 
 export class EmployeeVM {
     
-    constructor(_idEmp: number, _nameEmp: string, _fonction: string, _superviser: Employee | undefined, _birth: Date) {
+    constructor(_idEmp: number, _nameEmp: string, _fonction: string, _supervisor: Employee | undefined, _birth: Date) {
         this.idEmp = _idEmp;
         this.nameEmp = _nameEmp;
         this.fonction = _fonction;
-        this.superviser = _superviser;
+        this.supervisor = _supervisor;
         this.birth = _birth;
         this.password = "test";
     }
@@ -15,6 +15,6 @@ export class EmployeeVM {
     public nameEmp: string;
     public password: string;
     public fonction: string;
-    public superviser?: Employee;
+    public supervisor?: Employee;
     public birth: Date;
 }

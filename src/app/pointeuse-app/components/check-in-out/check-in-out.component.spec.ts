@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListeCongesComponent } from './liste-conges.component';
+import { CheckInOutComponent } from './check-in-out.component';
 
-describe('ListeCongesComponent', () => {
-  let component: ListeCongesComponent;
-  let fixture: ComponentFixture<ListeCongesComponent>;
+describe('CheckInOutComponent', () => {
+  let component: CheckInOutComponent;
+  let fixture: ComponentFixture<CheckInOutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListeCongesComponent ]
+      declarations: [ CheckInOutComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListeCongesComponent);
+    fixture = TestBed.createComponent(CheckInOutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

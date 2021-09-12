@@ -71,39 +71,42 @@
           <p mat-line> Compte </p>
         </a>
 
-        <mat-divider></mat-divider>
+        <div *ngIf="isAdmin">
+          <mat-divider></mat-divider>
 
-        <h3 mat-subheader>Changer Infos</h3>
+          <h3 mat-subheader>Changer Infos</h3>
 
-        <a mat-list-item [routerLink]="['/pointage']">
-          <mat-icon mat-list-icon>get_app</mat-icon>
-          <p mat-line>importer les pointages </p>
-        </a>
+          <a mat-list-item [routerLink]="['/admin/pointage']">
+            <mat-icon mat-list-icon>get_app</mat-icon>
+            <p mat-line>importer les pointages </p>
+          </a>
 
-        <a mat-list-item [routerLink]="['/employees']">
-          <mat-icon mat-list-icon>list</mat-icon>
-          <p mat-line>Liste des employés </p>
-        </a>
+          <a mat-list-item [routerLink]="['/admin/employees']">
+            <mat-icon mat-list-icon>list</mat-icon>
+            <p mat-line>Liste des employés </p>
+          </a>
 
-        <a mat-list-item [routerLink]="['/conges']">
-          <mat-icon mat-list-icon>work_off</mat-icon>
-          <p mat-line>Congés</p>
-        </a>
+          <a mat-list-item [routerLink]="['/admin/dayOffs']">
+            <mat-icon mat-list-icon>work_off</mat-icon>
+            <p mat-line>Congés</p>
+          </a>
 
-        <a mat-list-item [routerLink]="['/missions']">
-          <mat-icon mat-list-icon>work</mat-icon>
-          <p mat-line>Missions</p>
-        </a>
+          <a mat-list-item [routerLink]="['/admin/missions']">
+            <mat-icon mat-list-icon>work</mat-icon>
+            <p mat-line>Missions</p>
+          </a>
 
-        <a mat-list-item [routerLink]="['/planning']">
-          <mat-icon mat-list-icon>calendar_today</mat-icon>
-          <p mat-line>Planning</p>
-        </a>
+          <a mat-list-item [routerLink]="['/admin/planning']">
+            <mat-icon mat-list-icon>calendar_today</mat-icon>
+            <p mat-line>Planning</p>
+          </a>
 
-        <a mat-list-item [routerLink]="['/jourFeries']">
-          <mat-icon mat-list-icon>home</mat-icon>
-          <p mat-line>Jours fériés</p>
-        </a>
+          <a mat-list-item [routerLink]="['/admin/holidays']">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <p mat-line>Jours fériés</p>
+          </a>
+
+        </div>
 
       </mat-nav-list>
 

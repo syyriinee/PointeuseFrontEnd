@@ -14,14 +14,11 @@ export class Planning {
 }
 
 export class Horaire {
-  public dateDeb!: Date;
+  public dateDebut!: Date;
   public dateFin!: Date;
-  public seances!: Seance[];
-}
-
-export class Seance {
-  public jour!: string;
-  public heureDeb!: Time;
+  public heureDebut!: Time;
   public heureFin!: Time;
   public dureePause!: Time;
+  public heureDebutSamedi!: Time;
+  public heureFinSamedi!: Time;
 }

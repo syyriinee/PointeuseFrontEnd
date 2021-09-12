@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SavejourFerieComponent } from './save-jourFerie.component';
+import { ListeHolidayComponent } from './liste-holiday.component';
 
-describe('SavejourFerieComponent', () => {
-  let component: SavejourFerieComponent;
-  let fixture: ComponentFixture<SavejourFerieComponent>;
+describe('ListeholidayComponent', () => {
+  let component: ListeHolidayComponent;
+  let fixture: ComponentFixture<ListeHolidayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SavejourFerieComponent ]
+      declarations: [ ListeHolidayComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SavejourFerieComponent);
+    fixture = TestBed.createComponent(ListeHolidayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

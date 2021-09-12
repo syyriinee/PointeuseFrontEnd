@@ -10,7 +10,11 @@ export class Employee {
     public nameEmp!: string;
     public password!: string;
     public fonction!: string;
+    public email!:string;
     public birth!: Date;
     public superviseurId!: number;
     public planning!: number;
+    public pointages!: any[];
+    public dayOffList!: any[];
+    public missions!: any[];
 }

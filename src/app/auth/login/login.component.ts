@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     const rememberMe = this.loginForm.get('rememberMe')?.value;
 
     this.loading = true;
+    console.log("cliiiiiiiiiiick logoiin")
     this.authenticationService
       .login(email.toLowerCase(), password)
       .subscribe(

@@ -7,30 +7,30 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- ID Column -->
-        <ng-container matColumnDef="idCon">
+        <ng-container matColumnDef="idDayOff">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
             <td mat-cell *matCellDef="let row"> {{row.idMission}} </td>
         </ng-container>
 
-        <!-- employe Column -->
-        <ng-container matColumnDef="employe">
+        <!-- ee Column -->
+        <ng-container matColumnDef="employee">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Employé </th>
-            <td mat-cell *matCellDef="let row"> {{row.employe.nameEmp}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.idEmp}} </td>
         </ng-container>
 
 
-        <!-- dateDebut Column -->
-        <ng-container matColumnDef="dateDebut">
+        <!-- debutMission Column -->
+        <ng-container matColumnDef="debutMission">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date début </th>
-            <td mat-cell *matCellDef="let row"> {{row.dateDebut | date:'dd/MM/yyyy hh:mm'}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.debutMission | date:'dd/MM/yyyy hh:mm'}} </td>
         </ng-container>
 
         
 
-        <!-- dateFin Column -->
-        <ng-container matColumnDef="dateFin">
+        <!-- finMission Column -->
+        <ng-container matColumnDef="finMission">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date fin </th>
-            <td mat-cell *matCellDef="let row"> {{row.dateFin | date:'dd/MM/yyyy hh:mm'}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.finMission | date:'dd/MM/yyyy hh:mm'}} </td>
         </ng-container>
 
 

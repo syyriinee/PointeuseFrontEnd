@@ -32,27 +32,23 @@ export class SaveMissionsComponent implements OnInit {
 
   createForm() {
     this.missionForm = this.formBuilder.group({
-      'dateDebut': ["", [Validators.required]],
-      'dateFin': ["", [Validators.required]],
-      'employeId': ["", [Validators.required]],
+      'debutMission': ["", [Validators.required]],
+      'finMission': ["", [Validators.required]],
+      'employeeId': ["", [Validators.required]],
     })
   }
 
-  getErrorDateDebut() {
-    return this.missionForm.controls.dateDebut.hasError('required') ? 'Champs est vide' : '';
+  getErrorDebutMission() {
+    return this.missionForm.controls.debutMission.hasError('required') ? 'Champs est vide' : '';
   }
 
-  getErrorDateFin() {
-    return this.missionForm.controls.dateFin.hasError('required') ? 'Champs est vide' : '';
+  getErrorFinMission() {
+    return this.missionForm.controls.finMission.hasError('required') ? 'Champs est vide' : '';
   }
 
 
-  getErrorEmployeId() {
-    return this.missionForm.controls.employeId.hasError('required') ? 'Champs est vide' : '';
-  }
-
-  onSubmit() {
-    console.log(this.missionForm.value)
+  getErrorEmployeeId() {
+    return this.missionForm.controls.employeeId.hasError('required') ? 'Champs est vide' : '';
   }
 
   onNoClick(): void {

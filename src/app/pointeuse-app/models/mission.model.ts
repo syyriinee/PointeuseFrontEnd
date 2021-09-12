@@ -1,15 +1,14 @@
 import { Employee } from "./employee.model";
 
 export class Mission {
-    constructor(_id: number, _dateDebut: Date, _dateFin: Date,_employe:Employee|undefined) {
+    constructor(_id: number, _debutMission: Date, _finMission: Date) {
         this.idMission = _id;
-        this.dateDebut = _dateDebut;
-        this.dateFin = _dateFin;
-        this.employe = _employe;
+        this.debutMission = _debutMission;
+        this.finMission = _finMission;
     }
     public idMission!: number;
-    public dateDebut!: Date;
-    public dateFin!: Date;
-    public employeId!: number;
-    public employe?: Employee ;
+    public debutMission!: Date;
+    public finMission!: Date;
+    public idEmp!: number;
+    public employee?: Employee ;
 }
