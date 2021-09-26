@@ -3,31 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Employee } from '../models/employee.model';
-import { EmployeeVM } from '../models/employeeVM.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  private host: any;
 
-  // employees: EmployeeVM[] = [
-  //   new EmployeeVM(1, "syrine", "PDG", new Employee(1, "syrine", "PDG", new Date()), new Date()),
-  //   new EmployeeVM(2, "safa", "Responsable", new Employee(1, "syrine", "PDG", new Date()), new Date()),
-  //   new EmployeeVM(3, "heithem", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(4, "slah", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(5, "ali", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(6, "sameh", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(7, "kamel", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(8, "abdallah", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(9, "fathi", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(10, "kamilia", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(11, "mohammed", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  //   new EmployeeVM(12, "Ilyes", "Ouvrier", new Employee(2, "safa", "Responsable", new Date()), new Date()),
-  // ];
 
   constructor(private http: HttpClient) {
-    this.host = environment.backEndUrl;
+
   }
 
   listEmployees(pageSize: number, pageNumber: number): Observable<Employee[]> {
@@ -42,23 +27,39 @@ export class EmployeeService {
     console.log(environment.backEndUrl + "/employee/employeeList");
 
     return this.http.get<Employee[]>(environment.backEndUrl + "/employee/employeeList", { params });
-    
-   
+
+
   }
+
+  getEmplFromSupervisor(item: Employee) {
+    let params = new HttpParams().set("id", item.idEmp);
+    return this.http.get(environment.backEndUrl + "/employee/LisBySupervisor/", { params });
+  }
+
   getListFromSupervisor(item: Employee) {
-    //return this.http.get(environment.backEndUrl + "/employee/LisBySupervisor/", item);
+    const params = new HttpParams()
+      .append('item', 'item')
+    return this.http.get(environment.backEndUrl + "/employee/LisBySupervisor/", { params: params });
   }
 
   saveEmployee(item: Employee) {
-    return this.http.post(environment.backEndUrl + "/saveEmployee", item);
+    const params = new HttpParams()
+      .append('item', 'item')
+    return this.http.post(environment.backEndUrl + "/saveEmployee/", { params: params });
   }
 
-  deleteEmployee(item: Employee) {
-    return this.http.post(environment.backEndUrl + "/delete/employee",item);
+  deleteEmployee(idItem: number) {
+    const params = new HttpParams()
+      .append('idItem', 'idItem')
+    return this.http.post(environment.backEndUrl + "/delete/employee/", { params: params });
   }
 
 
-  uploadEmployee(idItem: number,month: number,year: number) {
-    return this.http.get(environment.backEndUrl + `/upload/employee/${idItem}/${month}/${year}`);
+  uploadEmployee(idItem: number, month: number, year: number) {
+    const params = new HttpParams()
+      .append('idItem', 'idItem')
+      .append('month', 'month')
+      .append('year', 'year');
+    return this.http.get(environment.backEndUrl + "/upload/employee/", { params: params });
   }
 }

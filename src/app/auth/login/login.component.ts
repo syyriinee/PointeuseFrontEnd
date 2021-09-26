@@ -6,6 +6,7 @@ import 'rxjs/add/operator/delay';
 
 import { AuthenticationService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
+import { DayOffService } from 'src/app/pointeuse-app/services/dayOff.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
     private titleService: Title,
     private notificationService: NotificationService,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,private _dayOffService: DayOffService) {
   }
 
   ngOnInit() {
@@ -48,8 +49,9 @@ export class LoginComponent implements OnInit {
     console.log("cliiiiiiiiiiick logoiin")
     this.authenticationService
       .login(email.toLowerCase(), password)
-      .subscribe(
+      .subscribe(        
         data => {
+          console.log("-----data---------------",data);
           if (rememberMe) {
             localStorage.setItem('savedUserEmail', email);
           } else {

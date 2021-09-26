@@ -8,6 +8,7 @@ import { Planning } from 'src/app/pointeuse-app/models/planning.model';
 import { PlanningService } from 'src/app/pointeuse-app/services/planning.service';
 import { SavePlanningComponent } from './save-planning/save-planning.component';
 import { Router } from '@angular/router';
+import { ifStmt } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-planning',
@@ -21,8 +22,8 @@ export class PlanningComponent implements OnInit {
 
   plannings!: Planning[];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   constructor(private _planningService: PlanningService, public dialog: MatDialog, public router: Router) {
   }
@@ -31,15 +32,24 @@ export class PlanningComponent implements OnInit {
     this.loadPlanning();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  //   this.dataSource.sort = this.sort;
+  // }
 
   loadPlanning() {
-    this.plannings = this._planningService.listPlannings();
-    console.log(this.plannings)
-    this.dataSource = new MatTableDataSource(this.plannings);
+    this._planningService.listPlannings().subscribe(
+      (dataSuccess: any) => {
+        console.log("load planning=", dataSuccess)
+        this.plannings = dataSuccess;
+        this.dataSource = new MatTableDataSource(this.plannings);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error => {
+        console.log("load list plannings error=", error)
+      }
+    );
   }
 
   applyFilter(event: Event) {
@@ -52,25 +62,10 @@ export class PlanningComponent implements OnInit {
   }
 
   onSave(item?: Planning) {
-    this.router.navigate(['planning/new']);
-    //console.log("item=", item)
-    //if (!item)
-    //  item = new Planning(0, "");
-
-    //const dialogRef = this.dialog.open(SavePlanningComponent, {
-    //  width: '800px',
-    //  data: item
-    //});
-
-    //dialogRef.afterClosed().subscribe(result => {
-    //  console.log('The dialog was closed');
-    //});
-
-
-
-    //dialogRef.afterClosed().subscribe(result => {
-    //  console.log('The dialog was closed');
-    //});
+    if (!item)
+      this.router.navigate(['admin/planning/new']);
+    else
+      this.router.navigate(['admin/planning',item.idPlanning]);
   }
 
   onDelete(item: Planning) {
@@ -82,14 +77,7 @@ export class PlanningComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == true) {
-        //supprimer
-        let index = this.dataSource.data.findIndex(x => x.idPlanning == item.idPlanning)
-        this.dataSource.data.splice(index, 1)
-        this.loadPlanning();
-      }
-    });
+
   }
 
 }

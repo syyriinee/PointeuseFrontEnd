@@ -30,16 +30,11 @@ export class ListeDayOffsComponent implements OnInit {
     this.loadDayOffs();
   }
 
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  //   this.dataSource.sort = this.sort;
-  // }
-
   loadDayOffs() {
     this._dayOffService.listDayOffs().subscribe(
       (dataSuccess: any) => {
         console.log("load list days off=", dataSuccess)
-        this.dayOffs = dataSuccess.content;
+        this.dayOffs = dataSuccess;
         this.dataSource = new MatTableDataSource(this.dayOffs);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

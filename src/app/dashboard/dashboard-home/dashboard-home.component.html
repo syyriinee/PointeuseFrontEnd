@@ -7,12 +7,64 @@
 
     </div>
 
-    <div class="container" fxLayout="row" fxLayoutAlign="center none">
-      <div fxFlex="50%" class="text-center no-records animate">
-        <mat-icon>dashboard</mat-icon>
-        <p>This is the dashboard.</p>
-      </div>
-      <mat-icon> </mat-icon>
+    <div class="row">
+      <mat-form-field style="margin-right:10px">
+        <mat-label>Employés</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let employe of employes" [value]="employe">
+            {{employe}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field style="margin-left:10px">
+        <mat-label>Month and Year</mat-label>
+        <input matInput [matDatepicker]="dp" (blur)="dateFormat('change', $event)" [formControl]="date" >
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp startView="multi-year" (blur)="dateFormat('change', $event)" (yearSelected)="chosenYearHandler($event)"
+          (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
+        </mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- workingMinutes Column -->
+        <ng-container matColumnDef="workingMinutes">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> minutes travaillée </th>
+          <td mat-cell *matCellDef="let row"> {{row.workingMinutes}} </td>
+        </ng-container>
+
+        <!-- daysOff Column -->
+        <ng-container matColumnDef="daysOff">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Congés </th>
+          <td mat-cell *matCellDef="let row"> {{row.daysOff}} </td>
+        </ng-container>
+
+
+        <!-- missions Column -->
+        <ng-container matColumnDef="missions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> missions </th>
+          <td mat-cell *matCellDef="let row"> {{row.missions}} </td>
+        </ng-container>
+
+        <!-- ecart Column -->
+        <ng-container matColumnDef="ecart">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ecart </th>
+          <td mat-cell *matCellDef="let row"> {{row.ecart}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+      </table>
+
+
     </div>
   </div>
 </div>

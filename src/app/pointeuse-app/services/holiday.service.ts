@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Holiday } from '../models/holiday.model';
@@ -16,10 +16,12 @@ export class HolidayService {
   }
 
   saveHoliday(item: Holiday) {
-    return this.http.post(environment.backEndUrl + "/holiday/save/", item);
+    let params = new HttpParams().set("holiday",JSON.stringify(item));
+    return this.http.post(environment.backEndUrl + "/holiday/save/", params);
   }
   
   deleteHoliday(idItem: number) {
-    return this.http.get(environment.backEndUrl +  `/holiday/delete/${idItem}`);
+    let params = new HttpParams().set("idHoliday",idItem);
+    return this.http.post(environment.backEndUrl +  "/holiday/delete/",params);
   }
 }

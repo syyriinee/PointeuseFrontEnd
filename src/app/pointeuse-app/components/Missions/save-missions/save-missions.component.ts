@@ -54,5 +54,4 @@ export class SaveMissionsComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

@@ -8,9 +8,9 @@
         <input matInput placeholder="Nom Planning" name="namePlanning" matTooltipClass="appToolTip"
                matTooltip="Nom Planning"
                [(ngModel)]="planningItem.namePlanning" namePlanning="ngModel" maxlength="255" required />
-        <!--<mat-error *ngIf="namePlanning.hasError('required')">
+        <!-- <mat-error *ngIf="namePlanning.hasError('required')">
           Name Planning est <strong>obligatoire</strong>
-        </mat-error>-->
+        </mat-error> -->
       </mat-form-field>
     </div>
   </div>
@@ -109,7 +109,7 @@
 
   <div class="row display_btn">
     <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
-    <button mat-raised-button type="submit" color="primary">Enregistrer</button>
+    <button mat-raised-button type="submit" color="primary" [mat-dialog-close]="planningItem">Enregistrer</button>
   </div>
 
 </div>

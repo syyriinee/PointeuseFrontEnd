@@ -34,7 +34,7 @@ export class ChangePasswordComponent implements OnInit {
     this.form = new FormGroup({
       currentPassword: new FormControl('', Validators.required),
       newPassword: new FormControl('', Validators.required),
-      newPasswordConfirm: new FormControl('', Validators.required),
+      newPasswordConfirm: new FormControl('', Validators.required)
     });
 
     this.form.get('currentPassword')?.valueChanges
@@ -58,14 +58,19 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
 
-    const email = this.authService.currentUser.email;
+    const idEmp = this.authService.currentUser.idEmp;
 
-    this.authService.changePassword(email, this.currentPassword, this.newPassword)
+    this.authService.changePassword(idEmp, this.currentPassword, this.newPassword)
       .subscribe(
         data => {
-          this.logger.info(`User ${email} changed password.`);
+          this.logger.info(`User changed password.`);
+          if(data== true){
           this.form.reset();
           this.notificationService.openSnackBar('Your password has been changed.');
+          }else{
+            this.notificationService.openSnackBar('Please check your credentials.');
+
+          }
         },
         error => {
           this.notificationService.openSnackBar(error.error);

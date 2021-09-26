@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../shared/layout/layout.component';
+import { CheckInOutComponent } from './components/check-in-out/check-in-out.component';
 import { ListeDayOffsComponent } from './components/DayOffs/liste-dayOffs/liste-dayOffs.component';
 import { ListEmployeesComponent } from './components/Employees/list-employees/list-employees.component';
 import { ListeHolidayComponent } from './components/holiday/liste-holiday/liste-holiday.component';
@@ -20,7 +21,9 @@ const routes: Routes = [
       { path: 'admin/missions', component: ListeMissionsComponent },
       { path: 'admin/holidays', component: ListeHolidayComponent },
       { path: 'admin/planning', component: PlanningComponent },
+      { path: 'admin/planning/:idPlanning', component: SavePlanningComponent },
       { path: 'admin/planning/new', component: SavePlanningComponent },
+      { path: 'checkInOut', component: CheckInOutComponent },
     ]
   }
 ];

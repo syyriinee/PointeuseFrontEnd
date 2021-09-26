@@ -20,7 +20,7 @@
     <!-- actions Column -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-raised-button color="primary" matTooltip="Ajouter nouveau congé" (click)="onSave()"
+        <button mat-raised-button color="primary" matTooltip="Ajouter nouveau planning" (click)="onSave()"
                 class="btns-space">
           <mat-icon>add</mat-icon>
         </button>
@@ -30,7 +30,7 @@
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-mini-fab color="warn" matTooltip="Désactiver ce congé" (click)="onDelete(row)">
+        <button mat-mini-fab color="warn" matTooltip="Désactiver ce planning" (click)="onDelete(row)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

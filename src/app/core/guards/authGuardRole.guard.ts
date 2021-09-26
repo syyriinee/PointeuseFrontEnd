@@ -37,6 +37,7 @@ export class AuthGuardRole implements CanActivate, CanActivateChild, CanLoad {
     }
 
     get isAdmin() {
+        //return false;
         return this.authService.currentUser ? this.authService.currentUser.fonction == "GRH" : false;
     }
 

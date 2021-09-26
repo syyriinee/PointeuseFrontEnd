@@ -1,29 +1,27 @@
-<input type="file" class="file-input"
-       [accept]="requiredFileType"
-       (change)="onFileSelected($event)" #fileUpload multiple>
-       <!-- <file-upload requiredFileType="accDB/MDB"></file-upload> -->
+<mat-card>
+  <mat-card-title>Import</mat-card-title>
 
-<div class="file-upload">
+  <mat-card-content>
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <mat-form-field class="form-element">
+          <mat-label>Table Name</mat-label>
+          <mat-select disableRipple name="nameTable" (change)="changeTable($event)">
+            <mat-option value="" disabled selected>Choose your table</mat-option>
+            <mat-option value="USERINFO">UserInfo</mat-option>
+            <mat-option value="CHECKINOUT">CheckInOut</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-   {{fileName || "No file uploaded yet."}}
-
-    <button mat-mini-fab color="primary" class="upload-btn"
-      (click)="fileUpload.click()">
-        <mat-icon>attach_file</mat-icon>
-
-    </button>
-
-</div>
-
-<div class="progress">
-
-  <mat-progress-bar class="progress-bar" mode="determinate"
-                    [value]="uploadProgress" *ngIf="uploadProgress">
-
-  </mat-progress-bar>
-
-  <mat-icon class="cancel-upload" (click)="cancelUpload()" 
-            *ngIf="uploadProgress">delete_forever</mat-icon>
-
-</div> 
-<!-- <input type="file" class="file-upload" onchange="console.log(event.target.files)">-->
+        <mat-form-field class="form-element">
+          <mat-label>Choose File</mat-label>
+          <input matInput id="fullPathInput" type="text" formControlName="fullPathInput"
+            placeholder="C:/Users/Syrine/Desktop/pointageEmploye7.accdb">
+        </mat-form-field>
+      </div>
+      <div class="displayBtn">
+        <button mat-raised-button color="primary" class="button" type="submit">Upload File</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

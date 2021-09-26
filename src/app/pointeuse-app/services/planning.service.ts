@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Planning } from '../models/planning.model';
@@ -16,18 +16,20 @@ export class PlanningService {
     new Planning(5, "safa"),
     new Planning(6, "safa"),
   ];
-
+ 
   constructor(private http: HttpClient) { }
 
   listPlannings() {
-    //return this.http.get(environment.backEndUrl + "/employees");
-    return this.plannings;
+    return this.http.get(environment.backEndUrl + "/planning");
+   
   }
   
   savePlanning(item: Planning) {
-    return this.http.post(environment.backEndUrl + "/planning/save/", item);
+    let params = new HttpParams().set("planning",JSON.stringify(item));
+    return this.http.post(environment.backEndUrl + "/planning/save/", params);
   }
-  deletePlanning(item: Planning) {
-    return this.http.post(environment.backEndUrl + "/planning/delete/",item);
+  deletePlanning(idItem: number) {
+    let params = new HttpParams().set("idPlanning",idItem);
+    return this.http.post(environment.backEndUrl + "/planning/delete/",params);
   }
 }

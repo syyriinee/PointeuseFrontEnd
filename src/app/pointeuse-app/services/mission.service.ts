@@ -1,22 +1,24 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Mission } from '../models/mission.model';
-import { Employee } from '../models/employee.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MissionService {
+ 
   constructor(private http: HttpClient) { }
 
   listMissions() {
     return this.http.get(environment.backEndUrl + "/allMissions");
   }
   saveMission(item: Mission) {
-    return this.http.post(environment.backEndUrl + "/mission/save/", item);
+//let params = new HttpParams().set("mission",JSON.stringify(item));
+    return this.http.post(environment.backEndUrl + "/mission/save", item);
   }
   deleteMission(idItem: number) {
-    return this.http.get(environment.backEndUrl + `/mission/delete/${idItem}`);
+    let params = new HttpParams().set("idMission",idItem);
+    return this.http.post(environment.backEndUrl + "/mission/delete/",params);
   }
 }

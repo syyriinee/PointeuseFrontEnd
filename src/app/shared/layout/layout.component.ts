@@ -40,6 +40,7 @@ export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // Auto log-out subscription
     const timer = TimerObservable.create(2000, 5000);
+    console.log("-----canActivate-------");
     this.autoLogoutSubscription = timer.subscribe(t => {
       this.authGuard.canActivate();
     });
