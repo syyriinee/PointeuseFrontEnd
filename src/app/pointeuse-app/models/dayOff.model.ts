@@ -1,15 +1,13 @@
 import { Employee } from "./employee.model";
 
 export class DayOff {
-    constructor(_idDayOff: number, _debutDayOff: Date, _finDayOff: Date) {
-        this.idDayOff = _idDayOff;
+    constructor( _debutDayOff: Date, _finDayOff: Date,_employee: Employee) {
         this.debutDayOff = _debutDayOff;
         this.finDayOff = _finDayOff;
-        //this.employee = _employee;
+        this.employee = _employee;
     }
     public idDayOff!: number;
     public debutDayOff!: Date;
     public finDayOff!: Date;
-    public idEmp!: number;
-    public employee?: Employee ;
+    public employee!: Employee ;
 }

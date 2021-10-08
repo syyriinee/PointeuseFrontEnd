@@ -17,7 +17,7 @@ import { SaveEmployeeComponent } from '../save-employee/save-employee.component'
 })
 export class ListEmployeesComponent implements OnInit {
 
-  displayedColumns: string[] = ['idEmp', 'nameEmp', 'fonction', 'birth', 'actions'];
+  displayedColumns: string[] = ['idEmp', 'nameEmp', 'fonction', 'email','birth', 'actions'];
   dataSource!: MatTableDataSource<Employee>;
 
   employees!: Employee[];
@@ -36,46 +36,23 @@ export class ListEmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEmployees();
+
   }
 
   loadEmployees() {
-    if (this.paginator?.pageSize)
-      this.pageSize = this.paginator.pageSize;
-
-    if (this.paginator?.pageIndex)
-      this.pageNumber = this.paginator.pageIndex;
-
-    merge(this.paginator?.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.cdRef.detectChanges(); // si on le meyt pas --> Exception expression has changed after it was checked.
-          return this._employeeService.listEmployees(this.pageSize, this.pageNumber);
-        }),
-        map((data: any) => {
-          this.cdRef.detectChanges();
-          this.resultsLength = data?.totalElements;
-          console.log(this.resultsLength);
-          return data;
-        }),
-        catchError(() => {
-          this.cdRef.detectChanges();
-          return of([]);
-        })
-      ).subscribe((response: any) => {
-        console.log(response);
-        this.employees = response.content;
-
-        console.log("-------loadEmployees------------------");
-
-        console.log(this.employees);
-        console.log("-------loadEmployees----*****--------------");
-
+ 
+    this._employeeService.listEmployees().subscribe(
+      (dataSuccess: any) => {
+        console.log("load list employees=", dataSuccess)
+        this.employees = dataSuccess;
         this.dataSource = new MatTableDataSource(this.employees);
-        console.log(this.paginator);
-         this.dataSource.paginator = this.paginator;
-         this.dataSource.sort = this.sort;
-      });
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error => {
+        console.log("load list employees error=", error)
+      }
+    );
   }
 
   paginatorChange(event: any) {
@@ -97,7 +74,7 @@ export class ListEmployeesComponent implements OnInit {
   onSave(item?: Employee) {
     console.log("item=", item)
     if (!item)
-      item = new Employee(0, "", "", new Date());
+      item = new Employee( "", "","", new Date());
 
     const dialogRef = this.dialog.open(SaveEmployeeComponent, {
       width: '800px',
@@ -107,6 +84,19 @@ export class ListEmployeesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.employee = result;
+      if (result) {
+        console.log('result=', result);
+        this._employeeService.saveEmployee(result).subscribe(
+          success => {
+            console.log(success);
+            this.loadEmployees();
+          },
+          error => {
+            console.log(error)
+          },
+        );
+      }
+
     });
   }
 
@@ -118,15 +108,21 @@ export class ListEmployeesComponent implements OnInit {
         "message": "Voulez vous vraiment supprimer " + item.nameEmp
       }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
         //supprimer
-        let index = this.dataSource.data.findIndex(x => x.idEmp == item.idEmp)
-        this.dataSource.data.splice(index, 1)
-        this.loadEmployees();
+      this._employeeService.deleteEmployee(item.idEmp).subscribe(
+        success=>{
+          console.log(success)
+          this.loadEmployees();
+        },
+        error=>{
+          console.log(error)
+        }
+      );      
       }
     });
+    
   }
 
 }

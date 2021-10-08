@@ -15,10 +15,11 @@ export class MissionService {
   }
   saveMission(item: Mission) {
 //let params = new HttpParams().set("mission",JSON.stringify(item));
-    return this.http.post(environment.backEndUrl + "/mission/save", item);
+    return this.http.post(environment.backEndUrl + "/mission/save/", item);
   }
+
   deleteMission(idItem: number) {
     let params = new HttpParams().set("idMission",idItem);
-    return this.http.post(environment.backEndUrl + "/mission/delete/",params);
+    return this.http.delete<Mission>(environment.backEndUrl + "/mission/delete",{params});
   }
 }

@@ -20,16 +20,16 @@ export class AuthenticationService {
         console.log("-----service login-----");
         let paramss = new HttpParams().set("email", email).set("password", password);
 
-        return this.http.post(environment.backEndUrl + "/employees/authenticate", paramss)
-            .pipe(map((response: any) => {
-                console.log("------auth success------");
-                console.log(response)
+        return this.http.post(environment.backEndUrl + "/employees/authenticate", paramss);
+            // .pipe(map((response: any) => {
+            //     console.log("------auth success------");
+            //     console.log(response)
 
-                this.localStorage.setItem('currentUser', JSON.stringify(response));
-                console.log("************");
-               // console.log(this.localStorage.getItem("currentUser"));
+            //     this.localStorage.setItem('currentUser', JSON.stringify(response));
+            //     console.log("************");
+            //     // console.log(this.localStorage.getItem("currentUser"));
 
-            }));
+            // }));
     }
 
     logout(): void {
@@ -49,9 +49,9 @@ export class AuthenticationService {
     }
 
     changePassword(idEmp: number, oldPassword: string, newPassword: string) {
-      console.log("----idEmp----------",idEmp);
-      console.log("------oldPassword--------", oldPassword);
-      console.log("----newPassword----------",newPassword);
+        console.log("----idEmp----------", idEmp);
+        console.log("------oldPassword--------", oldPassword);
+        console.log("----newPassword----------", newPassword);
         let paramss = new HttpParams().set("idEmp", idEmp).set("oldPassword", oldPassword).set("newPassword", newPassword);
 
         return this.http.post(environment.backEndUrl + "/employee/resetPSW", paramss);

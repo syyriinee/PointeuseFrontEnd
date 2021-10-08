@@ -16,12 +16,12 @@ export class HolidayService {
   }
 
   saveHoliday(item: Holiday) {
-    let params = new HttpParams().set("holiday",JSON.stringify(item));
-    return this.http.post(environment.backEndUrl + "/holiday/save/", params);
+    //let params = new HttpParams().set("holiday",JSON.stringify(item));
+    return this.http.post(environment.backEndUrl + "/holiday/save/", item);
   }
   
   deleteHoliday(idItem: number) {
     let params = new HttpParams().set("idHoliday",idItem);
-    return this.http.post(environment.backEndUrl +  "/holiday/delete/",params);
+    return this.http.delete(environment.backEndUrl +  "/holiday/delete/",{params : params});
   }
 }

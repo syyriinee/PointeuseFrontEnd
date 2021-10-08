@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -23,13 +23,22 @@ export class ListeMissionsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private _missionService: MissionService, public dialog: MatDialog) {
+  constructor(private _missionService: MissionService, public dialog: MatDialog, private cdref: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-    this.loadMissions();
+ 
+  }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.loadMissions();
+
+    });
   }
 
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
   loadMissions() {
     this._missionService.listMissions().subscribe(
       (dataSuccess: any) => {

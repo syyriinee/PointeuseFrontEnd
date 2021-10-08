@@ -11,3 +11,6 @@
   display: flex;
   flex-direction: row;
 }
+.mat-card{
+  margin-top: 30px;
+}

@@ -1,3 +1,8 @@
+
+<mat-card>
+  <mat-card-title>Les Plannings</mat-card-title>
+
+  <mat-card-content>
 <mat-form-field appearance="standard">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" #input>
@@ -30,7 +35,7 @@
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-mini-fab color="warn" matTooltip="Désactiver ce planning" (click)="onDelete(row)">
+        <button mat-mini-fab color="warn" matTooltip="supprimer ce planning" (click)="onDelete(row)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
@@ -47,3 +52,4 @@
 
   <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
+</mat-card-content>

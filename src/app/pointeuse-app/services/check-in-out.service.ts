@@ -13,14 +13,27 @@ export class CheckInOutService {
 
   constructor(private http: HttpClient) { }
 
-  listCheckInOuts(currentUser: Employee) {
+  listCheckInOuts(currentUser: Employee, month: number, year: number) {
     console.log("------currentUser-----------");
+    console.log(currentUser);
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
+  
+    return this.http.post(environment.backEndUrl + "/getPointageList", {currentUser,month,year}, options)
+      .pipe(map((list: any) => {
+        return list;
 
-    //let params = new HttpParams().set("employee",JSON.stringify(currentUser));
-    return this.http.post(environment.backEndUrl + "/getPointageList", currentUser, options)
+      }));
+  }
+  notifErreur(currentUser: Employee, month: number, year: number) {
+    console.log("------currentUser-----------");
+    console.log(currentUser);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };
+  
+    return this.http.post(environment.backEndUrl + "/employe/anomalie", {currentUser,month,year}, options)
       .pipe(map((list: any) => {
         return list;
 

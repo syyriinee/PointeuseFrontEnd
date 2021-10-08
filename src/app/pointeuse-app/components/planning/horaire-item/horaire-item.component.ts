@@ -10,11 +10,15 @@ export class HoraireItemComponent implements OnInit {
 
   @Input() item!: Horaire;
   @Output() itemChanged = new EventEmitter<Horaire>();
-
+  //private exportTime = { hour: 7, minute: 15, meriden: 'PM', format: 24 };
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  // onChangeHour(event:any) {
+  //   console.log('event', event);
+  // }
 
   dataChanged(event: any) {
     this.itemChanged.emit(this.item);

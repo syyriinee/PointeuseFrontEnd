@@ -10,7 +10,7 @@ import { LocalDatePipe } from './pipes/local-date.pipe';
 import { YesNoPipe } from './pipes/yes-no.pipe';
 import { LayoutComponent } from './layout/layout.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule,  NgxMatNativeDateModule,} from '@angular-material-components/datetime-picker';
 
 
 @NgModule({
@@ -42,6 +42,7 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
     LocalDatePipe,
     YesNoPipe,
     NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
      NgxMatTimepickerModule
   ],
   entryComponents: [

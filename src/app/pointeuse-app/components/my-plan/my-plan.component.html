@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-title>Mon Planning : 
+  <h4>{{nameHoraire}}</h4>
+</mat-card-title>
+
+  <mat-card-content>
+
+
+      <div fxLayout="column" fxFlex="50%">
+        <mat-label>Date Début : </mat-label>
+        {{debutHoraire|date:'YYYY-MM-dd'}}
+      
+        <mat-label>Date Fin : </mat-label>
+        {{finHoraire|date:'YYYY-MM-dd'}}
+      </div>
+
+      <div fxLayout="column" fxFlex="50%">
+        <mat-label>heure debut : </mat-label>
+        {{heureDebut}}
+
+        <mat-label>heure fin : </mat-label>
+        {{heureFin}}
+      </div>
+
+      <div fxLayout="column" fxFlex="50%">
+        <mat-label>Durée pause : </mat-label>
+        {{dureePause}} minutes
+      </div>
+
+      <div *ngIf="heureDebutSamedi!=null && heureFinSamedi!=null" fxLayout="column" fxFlex="50%">
+        <mat-label>heure debut samedi : </mat-label>
+        {{heureDebutSamedi}}
+      
+        <mat-label>heure fin samedi</mat-label>
+        {{heureFinSamedi}}
+      </div>
+
+    
+  </mat-card-content>
+</mat-card>

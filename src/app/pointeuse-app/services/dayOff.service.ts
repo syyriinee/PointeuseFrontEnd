@@ -16,13 +16,13 @@ export class DayOffService {
   }
 
   saveDayOff(item: DayOff) {
-    let params = new HttpParams().set("dayOff",JSON.stringify(item));
-    return this.http.post(environment.backEndUrl + "/dayOff/save",params);
+   // let params = new HttpParams().set("dayOff",JSON.stringify(item));
+    return this.http.post(environment.backEndUrl + "/dayOff/save/",item);
   }
 
   deleteDayOff(idItem: number) {
     let params = new HttpParams().set("idDayOff", idItem);
-    return this.http.post(environment.backEndUrl + "/dayOff/delete/",params);
+    return this.http.delete<DayOff>(environment.backEndUrl + "/dayOff/delete",{params});
   }
 
 }

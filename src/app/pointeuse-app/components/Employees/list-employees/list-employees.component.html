@@ -1,10 +1,14 @@
+<mat-card>
+    <mat-card-title>Liste des Employés</mat-card-title>
+  
+    <mat-card-content>
 <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort  matSortActive="idEmp" matSortDirection="asc" matSortDisableClear>
 
         <!-- ID Column -->
         <ng-container matColumnDef="idEmp">
@@ -30,6 +34,11 @@
             <td mat-cell *matCellDef="let row"> {{row.supervisor.nameEmp}} </td>
         </ng-container> -->
 
+        <!-- email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Adresse E-mail </th>
+            <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        </ng-container>
 
         <!-- birth Column -->
         <ng-container matColumnDef="birth">
@@ -70,3 +79,5 @@
     <mat-paginator [length]="resultsLength" [pageSize]="10" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons
         (page)="paginatorChange($event)" aria-label=" Select page of users"></mat-paginator>
 </div>
+</mat-card-content>
+</mat-card>

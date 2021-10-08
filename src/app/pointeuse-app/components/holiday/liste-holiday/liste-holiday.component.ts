@@ -17,6 +17,7 @@ export class ListeHolidayComponent implements OnInit {
   displayedColumns: string[] = ['idJFerie', 'name', 'date', 'actions'];
   dataSource!: MatTableDataSource<Holiday>;
 
+  holiday!: Holiday;
   holidays!: Holiday[];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -56,28 +57,14 @@ export class ListeHolidayComponent implements OnInit {
   onSave(item?: Holiday) {
     console.log("item=", item)
     if (!item)
-      item = new Holiday(0, "");
+      item = new Holiday(0, "", new Date());
 
     const dialogRef = this.dialog.open(SaveholidayComponent, {
       width: '800px',
       data: item
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result) {
-        console.log('result=', result);
-        this._holidayService.saveHoliday(result).subscribe(
-          success => {
-            console.log(success);
-            this.loadholiday();
-          },
-          error => {
-            console.log(error)
-          },
-        );
-      }
-    });
+
   }
 
   onDelete(item: Holiday) {

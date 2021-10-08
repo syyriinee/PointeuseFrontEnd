@@ -6,6 +6,7 @@ import { ListeDayOffsComponent } from './components/DayOffs/liste-dayOffs/liste-
 import { ListEmployeesComponent } from './components/Employees/list-employees/list-employees.component';
 import { ListeHolidayComponent } from './components/holiday/liste-holiday/liste-holiday.component';
 import { ListeMissionsComponent } from './components/Missions/liste-missions/liste-missions.component';
+import { MyPlanComponent } from './components/my-plan/my-plan.component';
 import { PlanningComponent } from './components/planning/planning.component';
 import { SavePlanningComponent } from './components/planning/save-planning/save-planning.component';
 import { PointageComponent } from './components/uploadPointage/pointage.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'admin/planning/:idPlanning', component: SavePlanningComponent },
       { path: 'admin/planning/new', component: SavePlanningComponent },
       { path: 'checkInOut', component: CheckInOutComponent },
+      { path: 'myPlan', component: MyPlanComponent }
     ]
   }
 ];

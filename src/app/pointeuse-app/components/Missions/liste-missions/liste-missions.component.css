@@ -2,7 +2,9 @@
     font-size: 14px;
     width: 100%;
   }
- 
+  .mat-card{
+    margin-top: 30px;
+  }
   table {
     width: 100%;
     table-layout: fixed;

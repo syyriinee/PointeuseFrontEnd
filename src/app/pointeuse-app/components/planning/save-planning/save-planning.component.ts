@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Horaire, Planning } from 'src/app/pointeuse-app/models/planning.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-save-planning',
@@ -8,13 +9,22 @@ import { Horaire, Planning } from 'src/app/pointeuse-app/models/planning.model';
   styleUrls: ['./save-planning.component.css']
 })
 export class SavePlanningComponent implements OnInit {
-
-  planningItem = new Planning(0, "");
-  constructor(private _location: Location) { }
+horaireForm! : FormGroup;
+  horaire!: Horaire;
+  planningItem = new Planning( "");
+  constructor(private formBuilder: FormBuilder,private _location: Location) { }
 
   ngOnInit(): void {
+    this.loadHoraire();
   }
-
+loadHoraire(){
+  if(this.horaire!=null){
+    this.horaireForm = this.formBuilder.group({
+      'horaire': [this.horaire, [Validators.required]],
+     
+    })
+  }else{this.addHoraire()}
+}
   onSubmit() {
     console.log(this.planningItem)
   }
@@ -23,36 +33,20 @@ export class SavePlanningComponent implements OnInit {
     //this.dialogRef.close();
     this._location.back();
   }
+  
+  changehoraire(item: Horaire, index: number) {
+    this.planningItem.horaire[index] = item;
+  }
 
-  addHoraireNrl() {
+  addHoraire() {
     let horaire = new Horaire();
-    this.planningItem.horaireNormal.push(horaire);
+    this.planningItem.horaire.push(horaire);
   }
 
-  removeHoraireNrl(item: Horaire) {
-    let index = this.planningItem.horaireNormal.indexOf(item, 0);
+  removeHoraire(item: Horaire) {
+    let index = this.planningItem.horaire.indexOf(item, 0);
     if (index > -1) {
-      this.planningItem.horaireNormal.splice(index, 1);
-    }
-  }
-
-  changeHoraireNormale(item: Horaire, index: number) {
-    this.planningItem.horaireNormal[index] = item;
-  }
-
-  changehoraireEte(item: Horaire, index: number) {
-    this.planningItem.horaireEte[index] = item;
-  }
-
-  addHoraireEte() {
-    let horaire = new Horaire();
-    this.planningItem.horaireEte.push(horaire);
-  }
-
-  removeHoraireEte(item: Horaire) {
-    let index = this.planningItem.horaireEte.indexOf(item, 0);
-    if (index > -1) {
-      this.planningItem.horaireEte.splice(index, 1);
+      this.planningItem.horaire.splice(index, 1);
     }
   }
 

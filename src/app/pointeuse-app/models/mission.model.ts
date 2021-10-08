@@ -9,6 +9,5 @@ export class Mission {
     public idMission!: number;
     public debutMission!: Date;
     public finMission!: Date;
-    public idEmp!: number;
-    public employee?: Employee ;
+    public employee!: Employee ;
 }

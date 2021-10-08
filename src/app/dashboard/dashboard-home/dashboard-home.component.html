@@ -3,68 +3,73 @@
   <div fxFlex="95%">
     <div class="container" fxLayout="row" fxLayoutAlign="center none">
 
-      <h2>Welcome back, {{currentUser.nameEmp}}!</h2>
+      <!-- <h2>Welcome back, {{currentUser.nameEmp}}!</h2> -->
 
     </div>
+    <mat-card>
+      <mat-card-title>Statistiques</mat-card-title>
 
-    <div class="row">
-      <mat-form-field style="margin-right:10px">
-        <mat-label>Employés</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let employe of employes" [value]="employe">
-            {{employe}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-
-      <mat-form-field style="margin-left:10px">
-        <mat-label>Month and Year</mat-label>
-        <input matInput [matDatepicker]="dp" (blur)="dateFormat('change', $event)" [formControl]="date" >
-        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp startView="multi-year" (blur)="dateFormat('change', $event)" (yearSelected)="chosenYearHandler($event)"
-          (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
-        </mat-datepicker>
-      </mat-form-field>
-
-    </div>
+      <mat-card-content>
+        <div class="row">
+          <mat-form-field style="margin-right:10px">
+            <mat-label>Employés</mat-label>
+            <mat-select (selectionChange)="onEmployeeSelectList($event.value)">
+              <mat-option [value]="currentUser"  selected=true>{{currentUser.nameEmp}}</mat-option>
+              <mat-option *ngFor="let employe of employes" [value]="employe">
+                {{employe.nameEmp}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
 
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
+          <mat-form-field style="margin-left:10px">
+            <mat-label>mois et année</mat-label>
+            <input matInput [matDatepicker]="dp" (blur)="dateFormat('change', $event)" [formControl]="date">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (blur)="dateFormat('change', $event)"
+              (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dp)"
+              panelClass="example-month-picker">
+            </mat-datepicker>
+          </mat-form-field>
 
-        <!-- workingMinutes Column -->
-        <ng-container matColumnDef="workingMinutes">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> minutes travaillée </th>
-          <td mat-cell *matCellDef="let row"> {{row.workingMinutes}} </td>
-        </ng-container>
+        </div>
 
-        <!-- daysOff Column -->
-        <ng-container matColumnDef="daysOff">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Congés </th>
-          <td mat-cell *matCellDef="let row"> {{row.daysOff}} </td>
-        </ng-container>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" >
 
+            <!-- workingMinutes Column -->
+            <ng-container matColumnDef="workingMinutes">
+              <th mat-header-cell *matHeaderCellDef > heures travaillées </th>
+              <td mat-cell *matCellDef="let row"> {{prepareHours(row.workingMinutes)}} </td>
+            </ng-container>
 
-        <!-- missions Column -->
-        <ng-container matColumnDef="missions">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> missions </th>
-          <td mat-cell *matCellDef="let row"> {{row.missions}} </td>
-        </ng-container>
-
-        <!-- ecart Column -->
-        <ng-container matColumnDef="ecart">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ecart </th>
-          <td mat-cell *matCellDef="let row"> {{row.ecart}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- daysOff Column -->
+            <ng-container matColumnDef="daysOff">
+              <th mat-header-cell *matHeaderCellDef > Congés </th>
+              <td mat-cell *matCellDef="let row"> {{prepareHours(row.daysOff)}} </td>
+            </ng-container>
 
 
-      </table>
+            <!-- missions Column -->
+            <ng-container matColumnDef="missions">
+              <th mat-header-cell *matHeaderCellDef > missions </th>
+              <td mat-cell *matCellDef="let row"> {{prepareHours(row.missions)}} </td>
+            </ng-container>
+
+            <!-- ecart Column -->
+            <ng-container matColumnDef="ecart">
+              <th mat-header-cell *matHeaderCellDef > ecart </th>
+              <td mat-cell *matCellDef="let row"> {{prepareHours(row.ecart)}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
 
 
-    </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

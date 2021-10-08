@@ -26,7 +26,8 @@ export class PointageComponent implements OnInit {
   fileToUpload: File | null = null;
   fullPath!: string;
   checkoutForm = this.formBuilder.group({
-    fullPathInput: ''
+    fullPathInput: '',
+    nameTableToUpload: ''
   });
 
   nameTableToUpload!: string;
@@ -82,9 +83,9 @@ export class PointageComponent implements OnInit {
     const target = event.target as HTMLInputElement;
     //this.fileToUpload = (target.files as FileList)[0];
     console.log(target);
-   //const aaa= target.files;
-console.log("----target.webkitdirectory-----");
-//console.log(aaa);
+    //const aaa= target.files;
+    console.log("----target.webkitdirectory-----");
+    //console.log(aaa);
     this.fullPath = target.value;
     console.log("----fullpath-------", this.fullPath);
 
@@ -92,12 +93,13 @@ console.log("----target.webkitdirectory-----");
 
   onSubmit() {
     console.log("----submit file----");
-    console.log(this.fullPath);
-     const fullPathInput=this.checkoutForm.get("fullPathInput")?.value;
-     console.log("---fullPathInput----", fullPathInput);
+    const nameTableToUpload = this.checkoutForm.get("nameTableToUpload")?.value;
+    const fullPathInput = this.checkoutForm.get("fullPathInput")?.value;
+    console.log("---fullPathInput----", fullPathInput);
+    console.log("----teble name----", nameTableToUpload);
 
-    console.log("----teble name----", this.nameTableToUpload);
-    if (this.nameTableToUpload == null) {
+
+    if (nameTableToUpload == null) {
       this.notificationService.openSnackBar("Please select table name!");
       return;
     }
@@ -105,7 +107,7 @@ console.log("----target.webkitdirectory-----");
       this.notificationService.openSnackBar("Please upload DB file!");
       return;
     }
-    this.pointageUploadService.uploadFile(fullPathInput, this.nameTableToUpload).subscribe(
+    this.pointageUploadService.uploadFile(fullPathInput, nameTableToUpload).subscribe(
       data => {
         console.log("-----data---------------", data);
         if (data == true) {

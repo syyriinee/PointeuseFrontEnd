@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -23,11 +23,21 @@ export class ListeDayOffsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
-  constructor(private _dayOffService: DayOffService, public dialog: MatDialog) {
+  constructor(private _dayOffService: DayOffService, public dialog: MatDialog, private cdref: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
-    this.loadDayOffs();
+  
+  }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.loadDayOffs();
+
+    });
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
   }
 
   loadDayOffs() {
@@ -58,24 +68,10 @@ export class ListeDayOffsComponent implements OnInit {
   onSave() {
     const dialogRef = this.dialog.open(SaveDayOffsComponent, {
       width: '800px'
+      
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result) {
-        console.log('result=', result);
-        this._dayOffService.saveDayOff(result).subscribe(
-          success => { 
-            console.log(success);
-            this.loadDayOffs();
-           },
-          error => { 
-            console.log(error) 
-          },
-        );
-      }
-
-    });
+    this.loadDayOffs();
   }
 
   onDelete(item: DayOff) {

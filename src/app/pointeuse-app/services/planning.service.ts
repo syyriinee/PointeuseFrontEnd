@@ -8,14 +8,7 @@ import { Planning } from '../models/planning.model';
 })
 export class PlanningService {
 
-  plannings: Planning[] = [
-    new Planning(1, "safa"),
-    new Planning(2, "safa"),
-    new Planning(3, "safa"),
-    new Planning(4, "safa"),
-    new Planning(5, "safa"),
-    new Planning(6, "safa"),
-  ];
+ 
  
   constructor(private http: HttpClient) { }
 
@@ -23,10 +16,15 @@ export class PlanningService {
     return this.http.get(environment.backEndUrl + "/planning");
    
   }
+  listHorairesByPlan(idPlan: number) {
+    let params = new HttpParams().set("idPlanning",idPlan);
+    return this.http.get(environment.backEndUrl + "/planning/horaires",{params : params});
+   
+  }
   
   savePlanning(item: Planning) {
-    let params = new HttpParams().set("planning",JSON.stringify(item));
-    return this.http.post(environment.backEndUrl + "/planning/save/", params);
+   // let params = new HttpParams().set("planning",JSON.stringify(item));
+    return this.http.post(environment.backEndUrl + "/planning/save/",item);
   }
   deletePlanning(idItem: number) {
     let params = new HttpParams().set("idPlanning",idItem);

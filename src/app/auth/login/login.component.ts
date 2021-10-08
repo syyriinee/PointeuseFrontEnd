@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/delay';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { DayOffService } from 'src/app/pointeuse-app/services/dayOff.service';
+import { Employee } from 'src/app/pointeuse-app/models/employee.model';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
     private titleService: Title,
+    @Inject('LOCALSTORAGE') private localStorage: Storage,
     private notificationService: NotificationService,
-    private authenticationService: AuthenticationService,private _dayOffService: DayOffService) {
+    private authenticationService: AuthenticationService, private _dayOffService: DayOffService) {
   }
 
   ngOnInit() {
@@ -49,17 +51,26 @@ export class LoginComponent implements OnInit {
     console.log("cliiiiiiiiiiick logoiin")
     this.authenticationService
       .login(email.toLowerCase(), password)
-      .subscribe(        
-        data => {
-          console.log("-----data---------------",data);
-          if (rememberMe) {
-            localStorage.setItem('savedUserEmail', email);
+      .subscribe(
+        (data: any) => {
+          console.log("-----data---------------", data);
+          if (data) {
+            this.localStorage.setItem('currentUser', JSON.stringify(data));
+
+            if (rememberMe) {
+              localStorage.setItem('savedUserEmail', email);
+            } else {
+              localStorage.removeItem('savedUserEmail');
+            }
+            this.router.navigate(['/']);
           } else {
-            localStorage.removeItem('savedUserEmail');
+            this.notificationService.openSnackBar("Vérifier vos champs");
+            this.loading = false;
           }
-          this.router.navigate(['/']);
+
         },
         error => {
+          console.log(error)
           this.notificationService.openSnackBar(error.error);
           this.loading = false;
         }

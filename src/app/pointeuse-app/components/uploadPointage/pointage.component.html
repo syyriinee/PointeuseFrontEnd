@@ -5,16 +5,17 @@
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <mat-form-field class="form-element">
-          <mat-label>Table Name</mat-label>
-          <mat-select disableRipple name="nameTable" (change)="changeTable($event)">
-            <mat-option value="" disabled selected>Choose your table</mat-option>
-            <mat-option value="USERINFO">UserInfo</mat-option>
+          <mat-label>Nom de la table </mat-label>
+          <mat-select disableRipple name="nameTable" formControlName="nameTableToUpload" (change)="changeTable($event)">
+            <mat-option value="" disabled selected>Choisir le nom de la table à importer</mat-option>
             <mat-option value="CHECKINOUT">CheckInOut</mat-option>
+            <mat-option value="USERINFO">CheckExact</mat-option>
+           
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="form-element">
-          <mat-label>Choose File</mat-label>
+          <mat-label>Fichier Access sous la forme "C:/dossier/emplacement..."</mat-label>
           <input matInput id="fullPathInput" type="text" formControlName="fullPathInput"
             placeholder="C:/Users/Syrine/Desktop/pointageEmploye7.accdb">
         </mat-form-field>

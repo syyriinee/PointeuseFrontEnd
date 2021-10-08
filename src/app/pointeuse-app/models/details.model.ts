@@ -1,15 +1,11 @@
-import { Employee } from "./employee.model";
-
 export class Details {
-    constructor( _id: number, __workingMinutes: number, _ecart: number, _daysOff: number, _missions: number) {
-       
+    constructor(_id: number, __workingMinutes: number, _ecart: number, _daysOff: number, _missions: number) {
+
         this.id = _id;
-        this.workingMinutes=__workingMinutes;
+        this.workingMinutes = __workingMinutes;
         this.daysOff = _daysOff;
         this.missions = _missions;
         this.ecart = _ecart;
-
-
     }
 
     public id!: number;
@@ -17,6 +13,4 @@ export class Details {
     public daysOff!: number;
     public missions!: number;
     public ecart!: number;
-
-
 }

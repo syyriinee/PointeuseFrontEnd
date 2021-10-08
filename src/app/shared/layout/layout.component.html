@@ -9,7 +9,7 @@
 
     <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
       <h1>
-        Pointeuse App
+        Application de pointage
       </h1>
     </a>
 
@@ -25,12 +25,12 @@
 
       <a mat-menu-item [routerLink]="['/account/profile']">
         <mat-icon>person</mat-icon>
-        <span>Account</span>
+        <span>Compte</span>
       </a>
 
       <a mat-menu-item [routerLink]="['/auth/login']">
         <mat-icon>exit_to_app</mat-icon>
-        <span>Log out</span>
+        <span>Déconnexion</span>
       </a>
 
     </mat-menu>
@@ -59,7 +59,7 @@
           <p mat-line> Pointage </p>
         </a>
 
-        <a mat-list-item [routerLink]="['/']">
+        <a mat-list-item [routerLink]="['/myPlan']">
           <mat-icon mat-list-icon>
             event_available
           </mat-icon>
@@ -116,9 +116,9 @@
     <mat-sidenav-content class="sidenav-content">
 
       <div class="progress-bar-container">
-        <mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
-        </mat-progress-bar>
-        <!-- <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner> -->
+        <!-- <mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
+        </mat-progress-bar> -->
+        <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
       </div>
 
       <div class="page-content">

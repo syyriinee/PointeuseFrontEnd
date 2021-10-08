@@ -1,100 +1,55 @@
 <div class="container">
 
-  <h1>Ajouter Planning</h1>
+  <h1>Modifier Planning</h1>
+  <!-- <div class="title">
+    <h1  *ngIf="!planning.idPlaning">Ajouter Planning</h1>
+    <h1  *ngIf="planning.idPlaning">Modifier Planning</h1>
+</div> -->
 
   <div fxLayout="row">
     <div fxFlex="100%">
       <mat-form-field class="full-width">
         <input matInput placeholder="Nom Planning" name="namePlanning" matTooltipClass="appToolTip"
-               matTooltip="Nom Planning"
-               [(ngModel)]="planningItem.namePlanning" namePlanning="ngModel" maxlength="255" required />
+          matTooltip="Nom Planning" [(ngModel)]="planningItem.namePlanning" namePlanning="ngModel" maxlength="255"
+          required />
         <!-- <mat-error *ngIf="namePlanning.hasError('required')">
           Name Planning est <strong>obligatoire</strong>
         </mat-error> -->
       </mat-form-field>
     </div>
   </div>
+  <mat-card-subtitle>
 
-  <!-- Bloc Horaire normal -->
-  <div fxLayout="row">
-    <h3>Horaire normale</h3>
-  </div>
-  <div fxLayout="row">
-    <mat-card>
-      <div class="row">
-        <mat-card-subtitle>
-          <button mat-fab color="primary"
-                  matTooltipClass="appToolTip"
-                  matTooltip="Ajouter un nouveau horaire normale" (click)="addHoraireNrl()">
-            <mat-icon mat-list-icon>add</mat-icon>
-          </button>
-        </mat-card-subtitle>
-      </div>
+    <button mat-fab color="primary" matTooltipClass="appToolTip" matTooltip="Ajouter un nouveau horaire"
+      (click)="addHoraire()">
+      <mat-icon mat-list-icon>add</mat-icon>
+    </button>
+    <div fxLayout="row">
+      <h3>Horaire </h3>
+    </div>
+  </mat-card-subtitle>
+
+  <!-- Bloc Horaire  -->
+
+  <div fxLayout="row" *ngFor="let horaire of planningItem.horaire; let i = index">
+    <mat-card style="margin-bottom: 10px;">
       <mat-card-content>
-        <div class="row">
-          <div class="col">
-            <mat-grid-list border="1" cols="12" rowHeight="2rem" *ngFor="let horaireNrl of planningItem.horaireNormal; let i = index">
+        <!-- <div class="row">
+          <div class="col"> -->
+        <mat-grid-list border="1" cols="12" rowHeight="4rem">
+          <mat-grid-tile [colspan]="10" [rowspan]="5">
+            <app-horaire-item [item]="horaire" (itemChanged)="changehoraire($event, i)"> </app-horaire-item>
+          </mat-grid-tile>
 
-              <mat-grid-tile [colspan]="11" [rowspan]="5">
-                <app-horaire-item [item]="horaireNrl" (itemChanged)="changeHoraireNormale($event, i)"> </app-horaire-item>
-              </mat-grid-tile>
-
-              <mat-grid-tile [colspan]="1" [rowspan]="2">
-                <button mat-mini-fab color="warn"
-                        matTooltipClass="appToolTip" matTooltip="Supprimer cet horaire"
-                        (click)="removeHoraireNrl(horaireNrl)">
-                  <mat-icon mat-list-icon>clear</mat-icon>
-                </button>
-              </mat-grid-tile>
-              <mat-grid-tile colspan="12" [rowspan]="1">
-                <mat-divider></mat-divider>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-
-  </div>
-  <!-- End Bloc Horaire normal -->
-  <!-- Bloc Horaire Ete -->
-  <div fxLayout="row">
-    <h3>Horaire été</h3>
-  </div>
-  <div fxLayout="row">
-    <mat-card>
-      <div class="row">
-        <mat-card-subtitle>
-          <button mat-fab color="primary"
-                  matTooltipClass="appToolTip"
-                  matTooltip="Ajouter un nouveau horaire d'été" (click)="addHoraireEte()">
-            <mat-icon mat-list-icon>add</mat-icon>
-          </button>
-        </mat-card-subtitle>
-      </div>
-      <mat-card-content>
-        <div class="row">
-          <div class="col">
-            <mat-grid-list border="1" cols="12" rowHeight="2rem" *ngFor="let horaireEte of planningItem.horaireEte; let i = index">
-
-              <mat-grid-tile [colspan]="11" [rowspan]="5">
-                <app-horaire-item [item]="horaireEte" (itemChanged)="changehoraireEte($event, i)"> </app-horaire-item>
-              </mat-grid-tile>
-
-              <mat-grid-tile [colspan]="1" [rowspan]="2">
-                <button mat-mini-fab color="warn"
-                        matTooltipClass="appToolTip" matTooltip="Supprimer cet horaire"
-                        (click)="removeHoraireEte(horaireEte)">
-                  <mat-icon mat-list-icon>clear</mat-icon>
-                </button>
-              </mat-grid-tile>
-              <mat-grid-tile colspan="12" [rowspan]="1">
-                <mat-divider></mat-divider>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </div>
-        </div>
+          <mat-grid-tile [colspan]="2" [rowspan]="2">
+            <button mat-mini-fab color="warn" matTooltipClass="appToolTip" matTooltip="Supprimer cet horaire"
+              (click)="removeHoraire(horaire)">
+              <mat-icon mat-list-icon>clear</mat-icon>
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <!-- </div>
+        </div> -->
       </mat-card-content>
     </mat-card>
 
@@ -102,13 +57,13 @@
   </div>
   <!-- End Bloc Horaire été -->
 
-  <div class="container">
+  <!-- <div class="container">
     {{ planningItem | json }}
-  </div>
+  </div> -->
 
 
   <div class="row display_btn">
-    <button mat-raised-button color="warn" (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button color="warn" (click)="onNoClick()">Annuler</button>
     <button mat-raised-button type="submit" color="primary" [mat-dialog-close]="planningItem">Enregistrer</button>
   </div>
 

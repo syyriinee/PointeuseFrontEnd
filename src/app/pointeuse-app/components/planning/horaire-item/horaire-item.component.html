@@ -1,8 +1,18 @@
-<div fxLayout="row">
-  <div fxLayout="column" fxFlex="50%">
+
+ <div fxLayout="row">
+  <div fxLayout="column" fxFlex="100%">
+    <mat-form-field>
+      <mat-label>nom horaire</mat-label>
+      <input matInput >
+    </mat-form-field>
+  </div>  
+  </div>
+  <div fxLayout="row">
+  <div fxLayout="column" fxFlex="40%">
     <mat-form-field class="full-width">
       <mat-label>Date Début</mat-label>
-      <input matInput [matDatepicker]="pickerDeb" name="dateDebut" dateDebut="ngModel" [(ngModel)]="item.dateDebut" />
+      <input matInput [matDatepicker]="pickerDeb" name="debutHoraire" debutHoraire="ngModel"
+        [(ngModel)]="item.debutHoraire" />
       <mat-datepicker-toggle matSuffix [for]="pickerDeb">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>
@@ -13,10 +23,11 @@
     </mat-form-field>
   </div>
 
-  <div fxLayout="column" fxFlex="50%">
+  <div fxLayout="column" fxFlex="40%">
     <mat-form-field class="full-width">
       <mat-label>Date Fin</mat-label>
-      <input matInput [matDatepicker]="pickerFin" name="dateFin" dateFin="ngModel" [(ngModel)]="item.dateFin" />
+      <input matInput [matDatepicker]="pickerFin" name="finHoraire" finHoraire="ngModel"
+        [(ngModel)]="item.finHoraire" />
       <mat-datepicker-toggle matSuffix [for]="pickerFin">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>
@@ -27,7 +38,33 @@
     </mat-form-field>
   </div>
 
-  
+  <div fxLayout="column" fxFlex="20%">
+    <mat-form-field>
+      <mat-label>Durée pause</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+  </div>
+ </div>
 
+<div fxLayout="row" >
+  <div fxLayout="column" fxFlex="25%">
+    <mat-label>heure debut</mat-label>
+    <ngx-mat-timepicker [(ngModel)]="item.heureDebut" value="08:00">
+    </ngx-mat-timepicker>
+  </div>
+  <div fxLayout="column" fxFlex="25%">
+    <mat-label>heure fin</mat-label>
+    <ngx-mat-timepicker [(ngModel)]="item.heureFin">
+    </ngx-mat-timepicker>
+  </div>
+  <div fxLayout="column" fxFlex="25%">
+    <mat-label>heure debut samedi</mat-label>
+    <ngx-mat-timepicker [(ngModel)]="item.heureDebutSamedi">
+    </ngx-mat-timepicker>
+  </div>
+  <div fxLayout="column" fxFlex="25%">
+    <mat-label>heure fin samedi</mat-label>
+    <ngx-mat-timepicker [(ngModel)]="item.heureFinSamedi">
+    </ngx-mat-timepicker>
+  </div>
 </div>
-

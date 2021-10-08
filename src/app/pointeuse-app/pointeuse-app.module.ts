@@ -19,6 +19,8 @@ import { SaveDayOffsComponent } from './components/DayOffs/save-dayOffs/save-day
 import { ListeHolidayComponent } from './components/holiday/liste-holiday/liste-holiday.component';
 import { SaveholidayComponent } from './components/holiday/save-holiday/save-holiday.component';
 import { CheckInOutComponent } from './components/check-in-out/check-in-out.component';
+import { MyPlanComponent } from './components/my-plan/my-plan.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { CheckInOutComponent } from './components/check-in-out/check-in-out.comp
     PlanningComponent,
     SavePlanningComponent,
     HoraireItemComponent,
-    CheckInOutComponent
+    CheckInOutComponent,
+    MyPlanComponent
 
   ],
   imports: [
