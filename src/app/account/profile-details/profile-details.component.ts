@@ -10,13 +10,14 @@ export class ProfileDetailsComponent implements OnInit {
 
   fullName: string = "";
   email: string = "";
-  alias: string = "";
+  fonction: string = "";
 
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.fullName = this.authService.currentUser.nameEmp;
     this.email = this.authService.currentUser.email;
+    this.fonction = this.authService.currentUser.fonction;
   }
 
 }

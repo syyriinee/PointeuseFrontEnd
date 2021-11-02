@@ -2,6 +2,12 @@
   <mat-card-title>Pointages</mat-card-title>
 
   <mat-card-content>
+    <mat-form-field appearance="standard" >
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+      
+  </mat-form-field>
+
     <div class="row">
    
         <mat-form-field style="margin-right:10px">
@@ -12,6 +18,7 @@
               {{employe.nameEmp}}
             </mat-option>
           </mat-select>
+          
         </mat-form-field>
      
 
@@ -24,8 +31,8 @@
             panelClass="example-month-picker">
           </mat-datepicker>
         </mat-form-field>
-      
-      
+
+        <button (click)="tinyAlert()">Pointages manquants</button>
     </div>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
@@ -33,7 +40,7 @@
         <!-- checkTime Column -->
         <ng-container matColumnDef="checkTime">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> checkTime </th>
-          <td mat-cell *matCellDef="let row"> {{row.checkTime | date:'dd/MM/yyyy hh:mm'}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.checkTime | date:'dd/MM/yyyy HH:mm:ss'}} </td>
         </ng-container>
 
 

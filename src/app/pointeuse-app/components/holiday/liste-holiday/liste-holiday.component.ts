@@ -7,13 +7,32 @@ import { Holiday } from 'src/app/pointeuse-app/models/holiday.model';
 import { HolidayService } from 'src/app/pointeuse-app/services/holiday.service';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { SaveholidayComponent } from '../save-holiday/save-holiday.component';
+import { Calendar } from '@progress/kendo-dateinputs-vue-wrapper';
+
+
 
 @Component({
   selector: 'app-liste-holiday',
   templateUrl: './liste-holiday.component.html',
   styleUrls: ['./liste-holiday.component.css']
 })
+
 export class ListeHolidayComponent implements OnInit {
+//   public isMeeting(date: Date) {
+//     return /10|15|20/.test(date.getDate().toString()) ? "meeting" : "";
+//   }
+  
+//   public isYearMeeting(date: Date) {
+//     return date.getMonth() % 3 ? "meeting" : "";
+//   }
+//   public isDecadeMeeting(date: Date) {
+//     return date.getDate() % 2 ? "meeting" : "";
+//   }
+//   public isCenturyMeeting(date: Date) {
+//     return date.getDate() % 20 ? "meeting" : "";
+//   }
+//   ngOnInit(): void {}
+// }
   displayedColumns: string[] = ['idJFerie', 'name', 'date', 'actions'];
   dataSource!: MatTableDataSource<Holiday>;
 
@@ -91,5 +110,4 @@ export class ListeHolidayComponent implements OnInit {
       }
     });
   }
-
 }

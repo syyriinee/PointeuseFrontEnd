@@ -26,7 +26,7 @@
         <!-- debutDayOff Column -->
         <ng-container matColumnDef="debutDayOff">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date début </th>
-            <td mat-cell *matCellDef="let row"> {{row.debutDayOff | date:'dd/MM/yyyy hh:mm'}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.debutDayOff | date:'dd/MM/yyyy HH:mm'}} </td>
         </ng-container>
 
 
@@ -34,7 +34,7 @@
         <!-- finDayOff Column -->
         <ng-container matColumnDef="finDayOff">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date fin </th>
-            <td mat-cell *matCellDef="let row"> {{row.finDayOff | date:'dd/MM/yyyy hh:mm'}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.finDayOff | date:'dd/MM/yyyy HH:mm'}} </td>
         </ng-container>
 
 
@@ -47,7 +47,7 @@
                 </button>
             </th>
             <td mat-cell *matCellDef="let row" class="actions-styling">
-                <button mat-mini-fab color="warn" matTooltip="Désactiver ce congé" (click)="onDelete(row)">
+                <button mat-mini-fab color="warn" matTooltip="Supprimer ce congé" (click)="onDelete(row)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

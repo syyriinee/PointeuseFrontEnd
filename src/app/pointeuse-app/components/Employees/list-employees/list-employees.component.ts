@@ -80,24 +80,6 @@ export class ListEmployeesComponent implements OnInit {
       width: '800px',
       data: item
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.employee = result;
-      if (result) {
-        console.log('result=', result);
-        this._employeeService.saveEmployee(result).subscribe(
-          success => {
-            console.log(success);
-            this.loadEmployees();
-          },
-          error => {
-            console.log(error)
-          },
-        );
-      }
-
-    });
   }
 
   onDelete(item: Employee) {
@@ -110,7 +92,7 @@ export class ListEmployeesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        //supprimer
+       console.log("result = ----------- ",item.idEmp)
       this._employeeService.deleteEmployee(item.idEmp).subscribe(
         success=>{
           console.log(success)

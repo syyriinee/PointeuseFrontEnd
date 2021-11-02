@@ -70,8 +70,22 @@ export class ListeDayOffsComponent implements OnInit {
       width: '800px'
       
     });
-
-    this.loadDayOffs();
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        console.log('result=', result);
+        this._dayOffService.saveDayOff(result).subscribe(
+          success => { 
+            console.log(success);
+            this.loadDayOffs();
+           },
+          error => { 
+            console.log(error) 
+          },
+        );
+      }
+    });
+  
   }
 
   onDelete(item: DayOff) {

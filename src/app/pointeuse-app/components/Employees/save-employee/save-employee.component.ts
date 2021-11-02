@@ -18,7 +18,6 @@ export class SaveEmployeeComponent implements OnInit {
     public dialogRef: MatDialogRef<SaveEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Employee,
     private _employeeService: EmployeeService,
-    private cdref: ChangeDetectorRef,
     private formBuilder: FormBuilder, ) { }
 
   ngOnInit(): void {
@@ -26,16 +25,7 @@ export class SaveEmployeeComponent implements OnInit {
     this.user=this.data;
     this.createForm()
   }
-  // ngAfterViewInit() {
-  //   setTimeout(() => {
-  //     this.createForm()
 
-  //   });
-  // }
-
-  // ngAfterContentChecked() {
-  //   this.cdref.detectChanges();
-  // }
   createForm() {
     this._employeeService.listFonctions().subscribe(
       (dataSuccess: any) => {
@@ -103,11 +93,11 @@ export class SaveEmployeeComponent implements OnInit {
 
   onSubmit() {
     console.log(this.employeeForm.value);
-    let nameEmp = this.employeeForm.get('nameEmp')?.value;
-    let email = this.employeeForm.get('email')?.value;
-    let fonction = this.employeeForm.get('fonction')?.value;
-    let supervisor = this.employeeForm.get('supervisor')?.value;
-    let birth = this.employeeForm.get('birth')?.value;
+    const nameEmp = this.employeeForm.get('nameEmp')?.value;
+    const email = this.employeeForm.get('email')?.value;
+    const fonction = this.employeeForm.get('fonction')?.value;
+    //const supervisor = this.employeeForm.get('supervisor')?.value;
+    const birth = this.employeeForm.get('birth')?.value;
 
     this.user.nameEmp = nameEmp;
     this.user.email = email;
@@ -119,7 +109,7 @@ export class SaveEmployeeComponent implements OnInit {
     this._employeeService.saveEmployee(this.user).subscribe(
       success => {
         console.log("success--------------", success);
-        //this.loadholiday();
+        
       },
       error => {
         console.log("errrrroooor-------------", error)

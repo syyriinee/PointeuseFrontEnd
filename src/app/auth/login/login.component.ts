@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
             } else {
               localStorage.removeItem('savedUserEmail');
             }
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
           } else {
             this.notificationService.openSnackBar("Vérifier vos champs");
             this.loading = false;

@@ -1,12 +1,39 @@
-div{
-    display: flex;
-    flex-direction: row;
+div {
+  display: flex;
+  flex-direction: row;
 }
-.mat-card{
-    margin-top: 30px;
-  }
-.mat-label{
-margin-top: 10px;
-margin-left: 10px;
-padding-top: 10px;
-  }
+
+.mat-card {
+  margin-top: 30px;
+}
+
+.mat-label {
+  margin-top: 10px;
+  margin-left: 10px;
+  padding-top: 10px;
+}
+
+mat-label {
+  font-weight: bold;
+  display: block;
+  width: 300px;
+  float: left;
+  color: darkblue;
+  margin-bottom: 5%;
+  margin-top: 5%;
+
+}
+
+p {
+  font-weight: bold;
+  display: block;
+  width: 300px;
+}
+
+mat-card-title {
+  color: darkblue;
+}
+
+h4 {
+  color: black;
+}

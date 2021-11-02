@@ -9,7 +9,7 @@
 
     <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
       <h1>
-        Application de pointage
+        PicoPointage
       </h1>
     </a>
 
@@ -25,7 +25,7 @@
 
       <a mat-menu-item [routerLink]="['/account/profile']">
         <mat-icon>person</mat-icon>
-        <span>Compte</span>
+        <span>Changer mot de passe</span>
       </a>
 
       <a mat-menu-item [routerLink]="['/auth/login']">
@@ -49,7 +49,7 @@
           <mat-icon mat-list-icon>
             dashboard
           </mat-icon>
-          <p mat-line> Dashboard </p>
+          <p mat-line> Statistiques </p>
         </a>
 
         <a mat-list-item [routerLink]="['/checkInOut']" routerLinkActive="active">
@@ -63,12 +63,12 @@
           <mat-icon mat-list-icon>
             event_available
           </mat-icon>
-          <p mat-line> Mon planing </p>
+          <p mat-line> Mon planning </p>
         </a>
 
         <a mat-list-item [routerLink]="['/account/profile']">
           <mat-icon mat-list-icon>person</mat-icon>
-          <p mat-line> Compte </p>
+          <p mat-line> Changer mot de passe</p>
         </a>
 
         <div *ngIf="isAdmin">
@@ -78,7 +78,7 @@
 
           <a mat-list-item [routerLink]="['/admin/pointage']">
             <mat-icon mat-list-icon>get_app</mat-icon>
-            <p mat-line>importer les pointages </p>
+            <p mat-line>importer les données </p>
           </a>
 
           <a mat-list-item [routerLink]="['/admin/employees']">

@@ -51,8 +51,8 @@ export class EmployeeService {
   }
 
   deleteEmployee(idItem: number) {
-    let params = new HttpParams().set('idItem', 'idItem')
-    return this.http.post(environment.backEndUrl + "/delete/employee/", { params: params });
+    let params = new HttpParams().set('idEmp', idItem)
+    return this.http.delete(environment.backEndUrl + "/delete/employee/", { params: params });
   }
 
 

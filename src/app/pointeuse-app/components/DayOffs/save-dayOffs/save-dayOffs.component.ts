@@ -66,33 +66,33 @@ export class SaveDayOffsComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  onSubmit() {
-    this.dialogRef.close();
-    console.log("********dddd*******", this.dayOffForm);
-    console.log('The dialog was closed');
+  // onSubmit() {
+  //   this.dialogRef.close();
+  //   console.log("********dddd*******", this.dayOffForm);
+  //   console.log('The dialog was closed');
 
-    // dialogRef.controls['name'].valueChanges.subscribe(value => {
-    //
-    //});
-    this.employee = this.dayOffForm.get('employee')?.value;
-    let debutDayOff = this.dayOffForm.get('debutDayOff')?.value;
-    let finDayOff = this.dayOffForm.get('finDayOff')?.value;
-    console.log("emploooooyeeeee", this.employee)
-    this.dayOff.employee = this.employee;
-    console.log("emploooooyeeeeedayOfffffff", this.dayOff.employee)
-    this.dayOff.debutDayOff = debutDayOff;
-    this.dayOff.finDayOff = finDayOff;
-    console.log('this.dayOff=', this.dayOff);
-    this._dayOffService.saveDayOff(this.dayOff).subscribe(
-      success => {
-        console.log(success);
+  //   // dialogRef.controls['name'].valueChanges.subscribe(value => {
+  //   //
+  //   //});
+  //   this.employee = this.dayOffForm.get('employe')?.value;
+  //   let debutDayOff = this.dayOffForm.get('debutDayOff')?.value;
+  //   let finDayOff = this.dayOffForm.get('finDayOff')?.value;
+  //   console.log("emploooooyeeeee", this.employee)
+  //   this.dayOff.employee = this.employee;
+  //   console.log("emploooooyeeeeedayOfffffff", this.dayOff.employee)
+  //   this.dayOff.debutDayOff = debutDayOff;
+  //   this.dayOff.finDayOff = finDayOff;
+  //   console.log('this.dayOff=', this.dayOff);
+  //   this._dayOffService.saveDayOff(this.dayOff).subscribe(
+  //     success => {
+  //       console.log(success);
 
-      },
-      error => {
-        console.log(error)
-      },
-    );
-  }
+  //     },
+  //     error => {
+  //       console.log(error)
+  //     },
+  //   );
+  // }
 
 
   getErrorDebutDayOff() {

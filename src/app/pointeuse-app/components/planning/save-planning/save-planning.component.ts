@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Horaire, Planning } from 'src/app/pointeuse-app/models/planning.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PlanningService } from 'src/app/pointeuse-app/services/planning.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-save-planning',
@@ -9,31 +11,61 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./save-planning.component.css']
 })
 export class SavePlanningComponent implements OnInit {
-horaireForm! : FormGroup;
+  horaireForm!: FormGroup;
   horaire!: Horaire;
-  planningItem = new Planning( "");
-  constructor(private formBuilder: FormBuilder,private _location: Location) { }
+  horaires!: Horaire;
+  planningForm!: FormGroup;
+  planningItem = new Planning("");
+  constructor(private formBuilder: FormBuilder,   public dialogRef: MatDialogRef<SavePlanningComponent>, @Inject(MAT_DIALOG_DATA) public data: Planning, private _planningService: PlanningService,private _location: Location) { }
 
   ngOnInit(): void {
     this.loadHoraire();
+    this.planningItem=this.data;
+    this.createForm()
   }
-loadHoraire(){
-  if(this.horaire!=null){
-    this.horaireForm = this.formBuilder.group({
-      'horaire': [this.horaire, [Validators.required]],
-     
-    })
-  }else{this.addHoraire()}
-}
+  createForm() {
+    this._planningService.listHorairesByPlan(this.planningItem.idPlanning).subscribe(
+      (dataSuccess: any) => {
+        console.log("load foctions=", dataSuccess)
+        this.horaires = dataSuccess;
+       
+      },
+      error => {
+        console.log("load emp fonction error=", error)
+      }
+    );
+    
+    if(this.planningItem!=null){
+      this.planningForm = this.formBuilder.group({
+    
+        'horaire': [this.planningItem.horaire, [Validators.required]]
+      })
+    }else{
+
+      this.planningForm = this.formBuilder.group({
+   
+        'horaire': [, [Validators.required]]
+      })
+    }
+   
+  }
+  loadHoraire() {
+    if (this.horaire != null) {
+      this.horaireForm = this.formBuilder.group({
+        'horaire': [this.horaire, [Validators.required]],
+
+      })
+    } else { this.addHoraire() }
+  }
   onSubmit() {
     console.log(this.planningItem)
   }
 
   onNoClick(): void {
-    //this.dialogRef.close();
-    this._location.back();
+    this.dialogRef.close();
+    //this._location.back();
   }
-  
+
   changehoraire(item: Horaire, index: number) {
     this.planningItem.horaire[index] = item;
   }
@@ -50,61 +82,9 @@ loadHoraire(){
     }
   }
 
-  //isValidFrsTags(): boolean {
-  //  let valid = true;
-
-  //  if (this.frsToEdit.name == null) {
-  //    this._alertService.errorsMsg("Nom fournisseur Obligatoire", null, MessageSeverity.error);
-  //    valid = false;
-  //  }
-
-  //  if (this.frsToEdit.voucher_send_nbrDays == null) {
-  //    this._alertService.errorsMsg("Nb Jour dissusion voucher Obligatoire", null, MessageSeverity.error);
-  //    valid = false;
-  //  }
-
-  //  if (valid) {
-  //    for (let frsTag of this.frsToEdit.ocrParams) {
-  //      if (frsTag.couponType == null) {
-  //        this._alertService.errorsMsg("Type Coupon Obligatoire", null, MessageSeverity.error);
-  //        //this.snackBar.open(`Type Coupon Obligatoire`, 'Cv.Voucher', { duration: 5000 });
-  //        valid = false;
-  //        break;
-  //      }
-  //      if (!frsTag.jsonPath) {
-  //        this._alertService.errorsMsg("Path json Obligatoire", null, MessageSeverity.error);
-  //        valid = false;
-  //        break;
-  //      }
-  //      if (!frsTag.tagNameStart) {
-  //        this._alertService.errorsMsg("Début tag Obligatoire", null, MessageSeverity.error);
-  //        //this.snackBar.open(`Début tag Obligatoire`, 'Cv.Voucher', { duration: 5000 });
-  //        valid = false;
-  //        break;
-  //      }
-  //    }
-  //  }
-
-  //  return valid;
-  //}
 
   onSave() {
-    //if (this.isValidFrsTags()) {
-    //  this._frsService.saveFrs(this.frsToEdit).subscribe(
-    //    (successData: Fournisseur) => {
-    //      this.idFrs = successData.id;
-    //      this._uiService.HideProgress();
-    //      if (successData !== null) {
-    //        this.loadFrsById(this.idFrs);
-    //        this._alertService.successMsg("Success", `Fournisseur was saved successfully`, MessageSeverity.success);
-    //      }
-    //    },
-    //    err => {
-    //      this._uiService.HideProgress();
-    //      this._alertService.errorsMsg("Save Fournisseur Params Error", err.message, MessageSeverity.error, err);
-    //      console.log(" addFrsCouponPage error : ", err)
-    //    });
-    //}
+    
   }
 
 }

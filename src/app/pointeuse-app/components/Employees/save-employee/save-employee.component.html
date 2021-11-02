@@ -69,12 +69,12 @@
         </form>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
         {{ employeeForm.value | json }}
-    </div>
+    </div> -->
 </div>
 <div mat-dialog-actions class="display_btn">
     <button mat-raised-button color="warn" (click)="onNoClick()">Annuler</button>
     <button mat-raised-button type="submit" color="primary" [mat-dialog-close]="user"
-        [disabled]="!employeeForm.valid">Enregistrer</button>
+    (click)="onSubmit()" [disabled]="!employeeForm.valid">Enregistrer</button>
 </div>

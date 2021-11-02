@@ -20,7 +20,7 @@
         <!-- debutMission Column -->
         <ng-container matColumnDef="debutMission">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date début </th>
-            <td mat-cell *matCellDef="let row"> {{row.debutMission | date:'dd/MM/yyyy hh:mm'}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.debutMission | date:'dd/MM/yyyy HH:mm'}} </td>
         </ng-container>
 
 
@@ -28,7 +28,7 @@
         <!-- finMission Column -->
         <ng-container matColumnDef="finMission">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date fin </th>
-            <td mat-cell *matCellDef="let row"> {{row.finMission | date:'dd/MM/yyyy hh:mm'}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.finMission | date:'dd/MM/yyyy HH:mm'}} </td>
         </ng-container>
 
         <!-- ee Column -->
@@ -47,7 +47,7 @@
                 </button>
             </th>
             <td mat-cell *matCellDef="let row" class="actions-styling">
-                <button mat-mini-fab color="warn" matTooltip="Désactiver ce congé" (click)="onDelete(row)">
+                <button mat-mini-fab color="warn" matTooltip="Supprimer cette mission" (click)="onDelete(row)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

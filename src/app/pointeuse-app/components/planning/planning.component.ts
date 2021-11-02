@@ -21,6 +21,7 @@ export class PlanningComponent implements OnInit {
   dataSource!: MatTableDataSource<Planning>;
 
   plannings!: Planning[];
+  planning!: Planning;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -62,12 +63,33 @@ export class PlanningComponent implements OnInit {
   }
 
   onSave(item?: Planning) {
+    console.log("item=", item)
     if (!item)
-      this.router.navigate(['admin/planning/new']);
-    else
-      this.router.navigate(['admin/planning',item.idPlanning]);
-  }
+      item = new Planning("");
 
+    const dialogRef = this.dialog.open(SavePlanningComponent, {
+      width: '800px',
+      data: item
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.planning= result;
+      if (result) {
+        console.log('result=', result);
+        this._planningService.savePlanning(result).subscribe(
+          success => {
+            console.log(success);
+            this.loadPlanning();
+          },
+          error => {
+            console.log(error)
+          },
+        );
+      }
+
+    });
+  }
   onDelete(item: Planning) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '800px',

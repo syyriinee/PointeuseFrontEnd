@@ -20,6 +20,6 @@ export class MissionService {
 
   deleteMission(idItem: number) {
     let params = new HttpParams().set("idMission",idItem);
-    return this.http.delete<Mission>(environment.backEndUrl + "/mission/delete",{params});
+    return this.http.delete<Mission>(environment.backEndUrl + "/mission/delete",{params : params});
   }
 }

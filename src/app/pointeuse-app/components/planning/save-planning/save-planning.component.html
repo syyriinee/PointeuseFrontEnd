@@ -1,12 +1,12 @@
 <div class="container">
+<!-- 
+  <h1>Modifier Planning</h1> -->
+  <div class="title">
+    <h1 mat-dialog-title *ngIf="!planningItem">Ajouter Planning</h1>
+    <h1 mat-dialog-title *ngIf="planningItem">Modifier Planning</h1>
+</div>
 
-  <h1>Modifier Planning</h1>
-  <!-- <div class="title">
-    <h1  *ngIf="!planning.idPlaning">Ajouter Planning</h1>
-    <h1  *ngIf="planning.idPlaning">Modifier Planning</h1>
-</div> -->
-
-  <div fxLayout="row">
+  <div fxLayout="row" mat-dialog-content>
     <div fxFlex="100%">
       <mat-form-field class="full-width">
         <input matInput placeholder="Nom Planning" name="namePlanning" matTooltipClass="appToolTip"
@@ -55,14 +55,14 @@
 
 
   </div>
-  <!-- End Bloc Horaire été -->
+ 
 
   <!-- <div class="container">
     {{ planningItem | json }}
   </div> -->
 
 
-  <div class="row display_btn">
+  <div mat-dialog-actions class="row display_btn">
     <button mat-raised-button color="warn" (click)="onNoClick()">Annuler</button>
     <button mat-raised-button type="submit" color="primary" [mat-dialog-close]="planningItem">Enregistrer</button>
   </div>

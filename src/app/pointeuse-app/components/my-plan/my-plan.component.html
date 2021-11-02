@@ -8,31 +8,31 @@
 
       <div fxLayout="column" fxFlex="50%">
         <mat-label>Date Début : </mat-label>
-        {{debutHoraire|date:'YYYY-MM-dd'}}
+        <p>{{debutHoraire|date:'YYYY-MM-dd'}}</p>
       
         <mat-label>Date Fin : </mat-label>
-        {{finHoraire|date:'YYYY-MM-dd'}}
+        <p>{{finHoraire|date:'YYYY-MM-dd'}}</p>
       </div>
 
       <div fxLayout="column" fxFlex="50%">
         <mat-label>heure debut : </mat-label>
-        {{heureDebut}}
+        <p>{{heureDebut}}</p>
 
         <mat-label>heure fin : </mat-label>
-        {{heureFin}}
+       <p> {{heureFin}}</p>
       </div>
 
       <div fxLayout="column" fxFlex="50%">
         <mat-label>Durée pause : </mat-label>
-        {{dureePause}} minutes
+        <p>{{dureePause}} minutes</p>
       </div>
 
       <div *ngIf="heureDebutSamedi!=null && heureFinSamedi!=null" fxLayout="column" fxFlex="50%">
         <mat-label>heure debut samedi : </mat-label>
-        {{heureDebutSamedi}}
+        <p>{{heureDebutSamedi}}</p>
       
-        <mat-label>heure fin samedi</mat-label>
-        {{heureFinSamedi}}
+        <mat-label>heure fin samedi : </mat-label>
+       <p> {{heureFinSamedi}}</p>
       </div>
 
     

@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import Swal from 'sweetalert2';
 import { CheckInOut } from '../../models/check-in-out.model';
 import { Employee } from '../../models/employee.model';
 import { CheckInOutService } from '../../services/check-in-out.service';
@@ -58,11 +60,11 @@ export class CheckInOutComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   currentUser!: any;
-
+  notifs!: String[];
   month!: number;
   year!: number;
 
-  constructor(private _checkInOutService: CheckInOutService, public dialog: MatDialog, private authService: AuthenticationService
+  constructor(private notificationService: NotificationService, private _checkInOutService: CheckInOutService, public dialog: MatDialog, private authService: AuthenticationService
     , @Inject('LOCALSTORAGE') private localStorage: Storage, private _employeeService: EmployeeService, private cdref: ChangeDetectorRef) {
   }
 
@@ -85,7 +87,7 @@ export class CheckInOutComponent implements OnInit {
   loadCheckInOuts() {
     console.log("-----loadCheckInOuts-------------");
     console.log(this.currentUser);
-    this._checkInOutService.listCheckInOuts(this.currentUser, this.month, this.year).subscribe(
+    this._checkInOutService.listCheckInOuts(this.currentUser, 10, 2010).subscribe(
       (dataSuccess: any) => {
         console.log("load list checkinout=", dataSuccess)
         this.checkInOuts = dataSuccess;
@@ -116,13 +118,12 @@ export class CheckInOutComponent implements OnInit {
         console.log("load emp sup error=", error)
       }
     );
-    this._checkInOutService.notifErreur(this.currentUser, this.month, this.year).subscribe(
+    this._checkInOutService.notifErreur(this.currentUser, 10, 2010).subscribe(
       (dataSuccess: any) => {
         console.log("load list notifs=", dataSuccess)
         this.checkInOuts = dataSuccess;
-        this.dataSource = new MatTableDataSource(this.checkInOuts);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.notifs = dataSuccess;
+
       },
       error => {
         console.log("load list notifs error=", error)
@@ -130,6 +131,14 @@ export class CheckInOutComponent implements OnInit {
     );
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   chosenYearHandler(normalizedYear: Moment) {
     const ctrlValue = this.date.value;
@@ -156,7 +165,8 @@ export class CheckInOutComponent implements OnInit {
 
   choisirEmp(empl: Employee) {
     console.log("-----empl-----", empl);
-    this._checkInOutService.listCheckInOuts(empl, this.month, this.year).subscribe(
+    // this._checkInOutService.listCheckInOuts(empl, this.month, this.year).subscribe(
+    this._checkInOutService.listCheckInOuts(empl, 10, 2010).subscribe(
       (dataSuccess: any) => {
         console.log("load list checkinout=", dataSuccess)
         this.checkInOuts = dataSuccess;
@@ -168,8 +178,27 @@ export class CheckInOutComponent implements OnInit {
         console.log("load list checkinout error=", error)
       }
     );
+    this._checkInOutService.notifErreur(empl, 10, 2010).subscribe(
+      (dataSuccess: any) => {
+        console.log("load list notifs=", dataSuccess)
+        this.checkInOuts = dataSuccess;
+        this.notifs = dataSuccess;
+
+      },
+      error => {
+        console.log("load list notifs error=", error)
+      }
+    );
   }
- 
-  
+  tinyAlert() {
+    let notif = "";
+    for (let i = 0; i < this.notifs.length; i++) {
+      notif = notif + this.notifs[i] + "\n"
+    }
+    if (notif !=="") { Swal.fire(notif); }
+    else { Swal.fire("pas de problèmes"); }
+
+  }
+
 }
 

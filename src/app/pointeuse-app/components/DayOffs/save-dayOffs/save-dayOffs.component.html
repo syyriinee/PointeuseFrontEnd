@@ -46,12 +46,12 @@
         </form>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
         {{ dayOffForm.value | json }}
-    </div>
+    </div> -->
 </div>
 <div mat-dialog-actions class="display_btn">
     <button mat-raised-button color="warn" (click)="onNoClick()">Annuler</button>
     <button mat-raised-button type="submit" color="primary" [disabled]="!dayOffForm.valid"
-        [mat-dialog-close]="dayOff" (click)="onSubmit()">Enregistrer</button>
+        [mat-dialog-close]="dayOffForm.value" >Enregistrer</button>
 </div>
